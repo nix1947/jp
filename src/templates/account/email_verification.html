@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container m-30 p-10 border" style="width:80%; margin:auto">
+        <div class="card ulike-card p-5 text-center">
+            <h2 class="font-size-7 p-5 m-5">Thank you for registering with us</h2>
+            <h2 class="text-center font-size-10">
+              <i class="fa fa-envelope-open primary-color"></i>
+            </h2>
+
+            <p class="font-size-5 font-weight-semibold ">Please verify your email address</p>
+            <p class="font-size-4 text-center">We have sent you a verification email at <span class="primary-color font-weight-bold">{{email}}</span> . <br/> Please verify your email address
+                to continue.</p>
+
+            <div class=" text-center">
+                <a class="d-inline-block btn btn-primary primary-color" href="/">Home Page</a>
+            </div>
+        </div>
+    </div>
+
+{%endblock content %}

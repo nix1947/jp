@@ -1,0 +1,377 @@
+{% extends 'dashboard_jobseeker/dashboard-main.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block dashboard_content %}
+
+
+<div class="container mb-20">
+
+
+    <!-- Navbar -->
+    <div class="bg-primary-color text-white p-6 font-size-3 mb-5">
+        <div class=" p-2 d-flex flex-wrap justify-content-between">
+            <div class="m-3 border p-3 flex-sm-fill ">
+                <a class="text-white" href="">Personal Details</a>
+            </div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">Resume</a>
+            </div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">EmploymentDetails</a>
+            </div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">Job Preferences</a>
+            </div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">Languages</a>
+            </div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">Certifications</a>
+            </div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">Documents</a></div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">Education</a></div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">References</a>
+            </div>
+            <div class="m-3 border p-3 flex-sm-fill">
+                <a href="#" class="text-white">References</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Personal Details -->
+    <div class="card ulike-card mb-5">
+        <div class="card-header ulike-card-header font-size-4">
+            <div class="d-flex">
+                <div class="font-size-4 w-100">Personal Details</div>
+                  <div>
+                                    <div><a href="" class="btn btn-orange"><i class="fa fa-pen"></i>&nbsp;Edit</a></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div>
+                <ul style="list-style:none">
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-dark">Name:</span> <span
+                            class="ml-20">{{request.user.profile.full_name}}</span></li>
+                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Current Address:</span>
+                        <span class="ml-20">{{request.user.profile.current_address}}</span></li>
+                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Permanent Address:</span>
+                        <span class="ml-20">{{request.user.profile.permanent_address}}</span></li>
+                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Nationality:</span>
+                        <span class="ml-20">{{request.user.profile.nationality}}</span></li>
+                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Country:</span>
+                        <span class="ml-20">{{request.user.profile.country}}</span></li>
+
+
+                    <div id="more-data" class="moreless">
+
+
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Career Objective:</span>
+                            <span class="ml-20">{{request.user.profile.career_objective}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Preference Level:</span>
+                            <span class="ml-20">{{request.user.profile.job_level}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Preference Location:</span>
+                            <span class="ml-20">{{request.user.profile.job_preference_location}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Preferences:</span>
+                            <span class="ml-20">{{request.user.profile.job_preferences.all}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Available for:</span>
+                            <span class="ml-20">{{request.user.profile.available_for}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-dark">City:</span> <span
+                                class="ml-20">{{request.user.profile.city}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Specilization in:</span>
+                            <span class="ml-20">{{request.user.profile.specializations}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Skills in:</span>
+                            <span class="ml-20">{{request.user.profile.skills}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Gender:</span>
+                            <span class="ml-20">{{request.user.profile.gender}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Marital Status:</span>
+                            <span class="ml-20">{{request.user.profile.martial_status}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Religion:</span>
+                            <span class="ml-20">{{request.user.profile.religion}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Contact Number:</span>
+                            <span class="ml-20">{{request.user.profile.contact_number}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Disabled:</span>
+                            <span class="ml-20">{{request.user.profile.is_disabled}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Disabled:</span>
+                            <span class="ml-20">{{request.user.profile.is_disabled}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Website:</span>
+                            <span class="ml-20">{{request.user.profile.website}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Website:</span>
+                            <span class="ml-20">{{request.user.profile.website}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Biograhy:</span>
+                            <span class="ml-20">{{request.user.profile.bio}}</span></li>
+                    </div>
+                    <li class="font-size-3"><a id="more"  class="primary-color" href="#" onclick="displayMoreLess();">More</a>...</li>
+
+
+                </ul>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- Education Details -->
+    <div class="card ulike-card mb-5">
+        <div class="card-header ulike-card-header font-size-4">
+            <div class="d-flex">
+                <div class="font-size-4 w-100">Education Details</div>
+                <div>
+                                    <div><a href="{% url 'dashboard_jobseeker:create-education' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table font-size-3 text-capitalize">
+                    <thead>
+                    <tr>
+                        <th scope="col">Degree</th>
+                        <th scope="col">Program</th>
+                        <th scope="col">Board</th>
+                        <th scope="col">Institute</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for education in request.user.profile.educations.all %}
+                    <tr>
+                        <td>{{education.degree}}</td>
+                        <td>{{education.education_program}}</td>
+                        <td>{{education.education_board}}</td>
+                        <td>{{education.name_of_institue}}</td>
+                        <td>{{education.started_year}}</td>
+                        <td><a href="{% url 'dashboard_jobseeker:edit-education' education.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                            Edit</a></td>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-education' education.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="card ulike-card mb-5">
+        <div class="card-header ulike-card-header font-size-4">
+            <div class="d-flex">
+                <div class="font-size-4 w-100">Working Experience</div>
+                  <div>
+                                    <div><a href="{% url 'dashboard_jobseeker:create-experience' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table font-size-3 table-responsive text-capitalize">
+                    <thead>
+                    <tr>
+                        <th scope="col">Organization Name</th>
+                        <th scope="col">Industry</th>
+                        <th scope="col">Job Location</th>
+                        <th scope="col">Job title</th>
+                        <th scope="col">Job Level</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Duties and Responsibilities</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for experience in request.user.profile.work_experiences.all %}
+                    <tr>
+                        <td>{{experience.organization_name}}</td>
+                        <td>{{experience.nature_of_organization}}</td>
+                        <td>{{experience.job_location}}</td>
+                        <td>{{experience.job_title}}</td>
+                        <td>{{experience.job_level}}</td>
+                        <td>{{experience.start_date}}</td>
+                        <td>{{experience.start_date}}</td>
+                        <td>{{experience.duties_and_responsibilities}}</td>
+                        <td><a href="{% url 'dashboard_jobseeker:edit-experience' experience.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                            Edit</a></td>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-experience' experience.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Training Details -->
+    <div class="card ulike-card mb-5">
+        <div class="card-header ulike-card-header font-size-4">
+            <div class="d-flex">
+                <div class="font-size-4 w-100">Training Details</div>
+                 <div>
+                                    <div><a href="{% url 'dashboard_jobseeker:create-training' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table font-size-3 text-capitalize">
+                    <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Institution Name</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for training in request.user.profile.trainings.all %}
+                    <tr>
+
+                        <td>{{training.name_of_training}}</td>
+                        <td>{{training.institution_name}}</td>
+                        <td>{{training.duration}} &nbsp; {{training.duration_type}}</td>
+                        <td><a href="{% url 'dashboard_jobseeker:edit-training' training.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                            Edit</a></td>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-training' training.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="card ulike-card mb-5">
+        <div class="card-header ulike-card-header font-size-4">
+            <div class="d-flex">
+                <div class="font-size-4 w-100">Language Details</div>
+                <div><a href="{% url 'dashboard_jobseeker:create-language' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table font-size-3 text-capitalize">
+                    <thead>
+                    <tr>
+                        <th scope="col">Language</th>
+                        <th scope="col">Reading</th>
+                        <th scope="col">Writing</th>
+                        <th scope="col">Speaking</th>
+                        <th scope="col">Listening</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for language in request.user.profile.languages.all %}
+                    <tr>
+
+                        <td>{{language.language}}</td>
+                        <td>{{language.reading}}/5</td>
+                        <td>{{language.writing}}/5</td>
+                        <td>{{language.speaking}}/5</td>
+                        <td>{{language.listening}}/5</td>
+                        <td><a href="{% url 'dashboard_jobseeker:edit-language' language.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                            Edit</a></td>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-language' language.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- References -->
+
+    <div class="card ulike-card mb-5">
+        <div class="card-header ulike-card-header font-size-4">
+            <div class="d-flex">
+                <div class="font-size-4 w-100">References Details</div>
+                  <div>
+                                    <div><a href="" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table font-size-3 text-capitalize">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Organization Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact Number</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for reference in request.user.profile.references.all %}
+                    <tr>
+
+                        <td>{{reference.reference_name}}</td>
+                        <td>{{reference.job_title}}</td>
+                        <td>{{reference.organization_name}}</td>
+                        <td>{{reference.email}}</td>
+                        <td>{{reference.contact_number}}</td>
+                        <td><a href="" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                            Edit</a></td>
+                        <td><a href="" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+
+<script>
+function displayMoreLess($event) {
+    var moreData = document.getElementById('more-data');
+    var btnName = document.getElementById('more');
+    if(btnName.innerText == 'More') {
+            btnName.innerText = 'Less';
+     } else if( btnName.innerText == 'Less') {btnName.innerText = 'More';}
+
+    moreData.classList.toggle('moreless');
+
+ }
+
+</script>
+
+{%endblock dashboard_content %}

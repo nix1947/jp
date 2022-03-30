@@ -1,0 +1,2 @@
+EMPLOYER = 'employer'
+JOBSEEKER = 'js'

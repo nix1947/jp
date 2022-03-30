@@ -1,0 +1,7 @@
+<div class="bg-primary-color text-white" style="width:80%; margin:auto;     background: #067080 !important;">
+    {% for message in messages %}
+    <li
+            {% if message.tags %} class="text-white{{ message.tags }}" {% endif %}>{{ message }}
+    </li>
+    {% endfor %}
+</div>
