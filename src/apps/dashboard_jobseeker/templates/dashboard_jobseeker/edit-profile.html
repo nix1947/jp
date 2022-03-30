@@ -1,0 +1,33 @@
+{% extends 'dashboard_jobseeker/dashboard-main.html' %}
+{% load crispy_forms_tags %}
+<style>
+    .nav-link {
+
+        color: black !important;
+    }
+
+</style>
+
+{% block dashboard_content %}
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-md-3  col-sm-12 border" style="padding:0px;">
+            <div style="border mr-20"  style="margin-right:20px; margin-left:20px;">
+                {# include 'dashboard_jobseeker/partials/_profile_menu.html' #}
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12" style=" padding:0px; ml-10">
+            <div  style="margin-left:20px;">
+                {% block edit_profile_content %}
+
+                {%endblock edit_profile_content%}
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock dashboard_content %}

@@ -1,0 +1,27 @@
+{% extends 'dashboard_jobseeker/edit-profile.html' %}
+{% load crispy_forms_tags %}
+<style>
+    .nav-link {
+
+        color: black !important;
+    }
+</style>
+
+{% block edit_profile_content %}
+
+<div class="card">
+    <div class="card-header">
+        <h6><i class="far fa-edit mr-7"></i>Delete </h6>
+    </div>
+    <div class="card-body m-5">
+        <form method="POST" action="">
+            {%csrf_token%}
+            <input type="hidden" name="id" value={{object.id}}>
+            <input type="submit" value="Delete" class="btn btn-blue">
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock edit_profile_content %}

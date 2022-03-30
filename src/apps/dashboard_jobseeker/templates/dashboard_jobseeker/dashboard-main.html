@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+{%block navbar %}
+
+{%endblock navbar %}
+
+{% block content %}
+
+<div class="site-wrapper overflow-hidden bg-default-2">
+
+
+    div.container-fuli
+    {#
+    {% block header %}
+    {% include 'dashboard_jobseeker/partials/_header.html' %}
+    {% endblock header %}
+
+    {% block dashboard_navbar %}
+    {% include 'dashboard_jobseeker/partials/_navbar.html' %}
+    {% endblock dashboard_navbar %}
+
+    #}
+
+
+    <div class="dashboard-main-container mt-20 mt-lg-20" id="dashboard-body">
+
+
+        {% block dashboard_content %}
+
+        <div class="container" style="max-width:95% !important;">
+            <!-- heading -->
+            <div class="d-flex flex-wrap p-5">
+                <div class="profile-img mr-20">
+                    <!-- profile picture -->
+                    <img src="{% static 'image/profile.png' %}" alt="">
+                </div>
+
+                <div class="short-info flex-grow-1">
+                    <h2 class="font-size-4 mb-0 font-size-semibold primary-color text-capitalize">
+                        {{request.user.profile.full_name}}</h2>
+                    <p class="font-size-3 mb-0 p-0"><span class="font-weight-semibold">Age:</span>
+                        {{request.user.profile.get_age}}</p>
+                    <p class="font-size-3 mb-0 p-0"><span class="font-weight-semibold">Current Address:</span>
+                        {{request.user.profile.current_address}}</p>
+                    <p class="font-size-3 mb-0 p-0"><span class="font-weight-semibold">Permanent Address:</span>
+                        {{request.user.profile.permanent_address}}</p>
+                    <p class="font-size-3 mb-0 p-0"><span class="font-weight-semibold">Email:</span>
+                        {{request.user.email}}</p>
+                    <p class="font-size-3 mb-0 p-0"><span class="font-weight-semibold">Contact:</span>
+                        {{request.user.profile.contact_numbercontact_number}}</p>
+
+                </div>
+
+                <div class="profile-completeness">
+                    <div class="text-danger-1    font-size-3 font-weight-semibold">26% Profile Completeness</div>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar bg-primary-color" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100">
+
+                        </div>
+                    </div>
+                      <p class="font-size-3 ">
+
+                        Complete Your Profile to increase your chance to get your dream job</p>
+                </div>
+
+
+            </div>
+
+            <!-- Cards -->
+            <div class="d-flex flex-wrap  ">
+                <a href="#" class="border d-block flex-fill p-10  mt-10 mb-10 mr-10">
+                    <h2 class="font-size-6 text-center primary-color">Recommended Jobs</h2>
+                    <h2 class="text-center primary-color font-size-10">{{request.user.profile.get_recommended_jobs.count }}</h2>
+                </a>
+                <a href="#" class="border d-block flex-fill p-10  mt-10 mb-10 mr-10">
+                    <h2 class="font-size-6 text-center primary-color">Jobs Applied</h2>
+                    <h2 class="text-center font-size-10 primary-color">{{request.user.profile.get_jobs_applied}}</h2>
+                </a>
+                <a href="#" class="border  d-block flex-fill p-10 mt-10 mb-10 mr-10 ">
+                    <h2 class="font-size-6 text-center primary-color">Saved Jobs</h2>
+                    <h2 class="text-center font-size-10 primary-color">{{request.user.profile.get_saved_jobs}}</h2>
+                </a>
+            </div>
+        </div>
+
+        {% endblock dashboard_content %}
+    </div>
+
+    <script src="js/custom.js"></script>
+    <script>
+    $(document).ready(function () {
+      $('label').addClass('d-block text-black-2 font-size-4 font-weight-semibold mb-4');
+      $('select').addClass('form-control')
+    });
+
+    </script>
+
+    {%endblock content %}
+
+    {%block footer%}
+
+    {%endblock footer %}

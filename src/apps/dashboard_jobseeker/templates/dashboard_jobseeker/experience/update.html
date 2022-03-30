@@ -1,0 +1,30 @@
+{% extends 'dashboard_jobseeker/edit-profile.html' %}
+
+{% load crispy_forms_tags %}
+<style>
+    .nav-link {
+
+        color: black !important;
+    }
+</style>
+
+{% block edit_profile_content %}
+
+<div class="card ulike-card">
+    <div class="card-header ulike-card-header">
+        <h2 class="font-size-4 text-white"><i class="far fa-edit mr-7"></i> Edit Experience</h2>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="">
+            {%csrf_token%}
+            {{form | crispy }}
+            <div class="text-right mt-3">
+                <input type="submit" value="EDIT" class="btn btn-sm btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock edit_profile_content %}

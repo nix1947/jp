@@ -1,0 +1,51 @@
+{% extends 'dashboard_employer/dashboard-main.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard_content %}
+
+
+<style>
+
+</style>
+<div class="container">
+    <div class="row">
+
+        <div class="col-xxxl-9 px-lg-13 px-6">
+            <h5 class="font-size-6 font-weight-semibold mb-11">Post a New Job</h5>
+            <div class="contact-form bg-white shadow-8 rounded-4 pl-sm-10 pl-4 pr-sm-11 pr-4 pt-15 pb-13">
+
+                {% if form.errors %}
+                {% for field in form %}
+                {% for  error in field.errors %}
+                <div class="alert alert-danger">
+                    <small>In {{field.label}}&nbsp;{{ error|escape }} </small>
+                </div>
+                {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <p>{{ error|escape }} </p>
+                </div>
+                {% endfor %}
+
+                {% endif %}
+
+
+
+                <form action="." method="post">
+                    {% csrf_token %}
+                    {{form | crispy}}
+
+                    <input class="btn btn-success" type="submit" value="Update" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+{%endblock dashboard_content %}

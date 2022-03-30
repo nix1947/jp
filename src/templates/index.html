@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    {% include 'partials/_meta.html' %}
+    <title>Nepal Number 1 job portal </title>
+    <!-- Custom stylesheet -->
+    {% include 'partials/_css.html' %}
+</head>
+
+<body>
+<div class="site-wrapper overflow-hidden ">
+    <!-- Header start  -->
+    {% include 'partials/_navbar.html' %}
+
+
+    <div class="text-white p-5" style="margin-top:80px; padding:20px; background:#00737E; height:150px;">
+        <div class="container">
+            <form action="/search" class="search-form" method="get">
+                <div class="row" style="margin-top:40px;">
+                    <div class="col">
+
+                        <input type="text" name="q" value="{{q}}" class="form-control"
+                               placeholder="search Job by Title, Skill Company"/>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="location" value="{{location}}" class="form form-control"
+                               placeholder="Location"/>
+                    </div>
+                    <div class="col ">
+                        <input type="submit" class="btn btn  btn-orange" value="SEARCH JOB"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div style="background:#1B4243; height:48px;">
+        <div class="container p-5">
+            <p class="text-white font-size-4 font-weight-semibold ">Track Application Status, Job Recommendation,
+                Bookmarked Jobs,Employment Notification and
+                <a href="">More</a></p>
+        </div>
+    </div>
+
+
+    {% block content %}
+
+
+    <!-- Top jobs -->
+    <div style="background:#FFF;" class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 mb-5 col-md-9">
+                    <!-- Top jobs -->
+                    <div class="hot-jobs mb-5">
+                        <div class="card" style="border-radius:0px;">
+                            <div class="card-header text-white" style="background:#067080; border-radius:0px;">
+                                <i class="fa fa-briefcase text-white"></i> Top Jobs
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                     {% for company in top_job_companies %}
+                                    <div class="col-md-4 border-right border-bottom">
+                                        <div class="d-flex job-card p-2 mb-1 border"
+                                             style="max-height:120px; overflow:hidden ">
+                                            <div class="border mt-2"
+                                                 style="width:74px; height:74px; border: 1px solid #dddee0; ">
+                                                <img height="70px" width="70px"
+                                                     src="https://api.v1.jobejee.com/v2/resource/employer-logo/27ab9d311647409441033.jpg"/>
+                                            </div>
+                                            <div class="ml-3" style="overflow-y:hidden">
+                                                <h2 class="font-size-4 text-truncate font-weight-bold"
+                                                    style="margin:0px; color:#067080;">
+                                                    <a class="primary-color primary-color-hover" href="">{{company}}</a>
+                                                </h2>
+                                                <ul class="pl-6 d-block">
+                                                    {% for job in company.job_set.all %}
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-link d-block "
+                                                           href="{{job.get_absolute_url}}">{{job.title}}</a></li>
+                                                    {% endfor %}
+
+                                                </ul>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                     {% endfor %}
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Top jobs -->
+                    <div class="hot-jobs">
+                        <div class="card" style="border-radius:0px;">
+                            <div class="card-header text-white" style="background:#067080; border-radius:0px;">
+                                <img src="{% static 'image/svg/icon-fire-rounded.svg' %}" alt=""> Hot Jobs
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 border-right border-bottom">
+                                        <div class="d-flex job-card p-2 mb-1 border"
+                                             style="max-height:120px; overflow:hidden ">
+                                            <div class="border mt-2"
+                                                 style="width:74px; height:74px; border: 1px solid #dddee0; ">
+                                                <img height="70px" width="70px"
+                                                     src="https://api.v1.jobejee.com/v2/resource/employer-logo/27ab9d311647409441033.jpg"/>
+                                            </div>
+                                            <div class="ml-3" style="overflow-y:hidden">
+                                                <h2 class="font-size-4 text-truncate font-weight-bold"
+                                                    style="margin:0px; color:#067080;">
+                                                    <a class="primary-color primary-color-hover" href="">Smart Data
+                                                        solution</a>
+                                                </h2>
+                                                <ul class="pl-6 d-block">
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-link d-block "
+                                                           href="#">Corporate sales supervisor</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-link d-block "
+                                                           href="#">Graphic designer</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-gray d-block "
+                                                           href="#">Senior client servicing</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-gray d-block "
+                                                           href="#">hello world from the top of the world</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-gray d-block "
+                                                           href="#">hello world from the top of the world</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-gray d-block "
+                                                           href="#">hello world from the top of the world</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-gray d-block "
+                                                           href="#">hello world from the top of the world</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-gray d-block "
+                                                           href="#">hello world from the top of the world</a></li>
+                                                    <li>
+                                                        <a class="text-truncate mb-0 font-size-3 text-capitalize text-gray d-block "
+                                                           href="#">hello world from the top of the world</a></li>
+                                                </ul>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 border-right border-bottom"></div>
+                                    <div class="col-md-4 border-right border-bottom"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <!-- Side bar -->
+                <div class="col-md-3 col-sm-12">
+                    {% include 'partials/_sidebar.html' %}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    {% endblock content %}
+    <!-- ContentTwo Area -->
+    <!-- footer area function start -->
+    {% include 'partials/_footer.html' %}
+    <!-- footer area function end -->
+</div>
+<!-- Vendor Scripts -->
+{% include 'partials/_js.html' %}
+</body>
+
+</html>

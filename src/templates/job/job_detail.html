@@ -1,0 +1,292 @@
+{% extends 'index.html' %}
+{%load static %}
+{% load humanize %}
+
+
+{% block content %}
+<div class="container">
+
+    <div class="row mt-5">
+
+        <div class="col-md-8 col-sm-12">
+
+
+            <!-- jobDetails-section -->
+            <div class="card p-5 mt-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+                <div class="d-flex">
+                    <div class="border p-1">
+                        <img height="100px" width="100px"
+                             src="https://api.v1.jobejee.com/v2/resource/employer-logo/7170e61c1647603505897.jpg"/>
+                    </div>
+
+                    <div class="ml-10 flex-grow-1 ">
+                        <h2 class="font-size-4" style="margin:0px;">
+                            {{object.title}}
+                        </h2>
+                        <h2 class="font-size-3 text-truncate font-weight-bold" style="margin:0px; color:#067080;">
+                            <a class=" primary-color primary-color-hover text-capitalize"
+                               href="{{object.company.get_absolute_url}}">{{object.company}}</a>
+                        </h2>
+                        <h2 class="font-size-3 text-gray text-truncate text-capitalize"
+                            style="margin:0px; color:#067080;">
+                            Vacancy: {{object.no_of_vacancies}}
+                        </h2>
+                        <h2 class="font-size-3 text-truncate text-capitalize text-gray "
+                            style="margin:0px; color:#067080;">
+                            Location: {{object.job_location.location}}
+                        </h2>
+
+
+                    </div>
+
+                    <div class="">
+                        <!-- TODO: Apply now -->
+<!--                        <p class="font-size-4"><a class="btn btn-sm " style="background: #00737E; color:#FFF;" href="">-->
+<!--                            <i class="fa fa-paper-plane"></i>&nbsp; Apply Now</a></p>-->
+                        <p class="d-block font-size-3" style="margin:0px;"><i class="fa fa-share"></i> &nbsp; Share this
+                            job </p>
+                        <p class="text-capitalize font-size-3 primary-color d-block" style="margin:0px;"><i
+                                class="fa fa-globe"></i> &nbsp; <a class="primary-color" href="{{object.company.website}}">Visit official site</a></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card p-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex">
+                            <div>
+                                <i class="text-orange fa fa-rupee-sign mt-1 d-block" height="30px" width="auto"
+                                   style="font-size:1.7rem;" alt=""></i>
+                            </div>
+
+                            <div class="ml-5">
+                                <div class="font-size-3 font-weight-bold " style="margin:0px; color:#067080;">
+                                    <span class="text-gray d-block text-capitalize">
+                                      Offered Salary
+                                    </span>
+
+                                </div>
+                                <div class="font-size-3" style="margin:0px;">{{object.offered_salary}}</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="d-flex">
+                            <div>
+                                <i class="fa mt-1 d-block fa-briefcase text-orange" style="font-size:1.7rem;"></i>
+                                &nbsp;
+                            </div>
+
+                            <div class="ml-5">
+                                <div class="font-size-3 font-weight-bold " style="margin:0px; color:#067080;">
+                            <span class="text-gray d-block text-capitalize">
+
+                             Experience
+                            </span>
+
+                                </div>
+                                <div class="font-size-3" style="margin:0px;">{{object.experience}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex">
+                            <div>
+                                <i class=" fa fa-graduation-cap mt-1 text-orange d-block" style="font-size:1.7rem;"></i>
+                            </div>
+
+                            <div class="ml-5">
+                                <div class="font-size-3 font-weight-bold " style="margin:0px; color:#067080;">
+                            <span class="text-gray d-block text-capitalize">
+                             Job Type
+                            </span>
+
+                                </div>
+                                <div class="font-size-3 text-capitalize" style="margin:0px;">
+                                    {{object.employment_type}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex">
+                            <div>
+                                <i class="text-orange fa fa-industry mt-1 d-block" height="30px" width="auto" alt=""
+                                   style="font-size:1.7rem;"></i>
+                            </div>
+
+                            <div class="ml-5">
+                                <div class="font-size-3 font-weight-bold " style="margin:0px; color:#067080;">
+                            <span class="text-gray d-block text-capitalize">
+                              Industry
+                            </span>
+
+                                </div>
+                                <div class="font-size-3" style="margin:0px;">{{object.job_industry}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex">
+                            <div>
+                                <i class="text-orange fa fa-clock mt-1 d-block" height="30px"
+                                   style="font-size:1.7rem;"></i>
+                            </div>
+
+                            <div class="ml-5">
+                                <div class="font-size-3 font-weight-bold " style="margin:0px; color:#067080;">
+                            <span class="text-gray d-block text-capitalize">
+                             Posted Date
+                            </span>
+
+                                </div>
+                                <div class="font-size-3 text-capitalize" style="margin:0px;">{{object.posted_date | naturalday}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex">
+                            <div>
+                                <i class="text-orange   fa fa-calendar  mt-1 d-block" style="font-size:1.7rem;"
+                                   alt=""></i>
+                            </div>
+
+                            <div class="ml-5">
+                                <div class="font-size-3 font-weight-bold " style="margin:0px; color:#067080;">
+                            <span class="text-gray d-block text-capitalize" href="/company">
+                             Valid Until
+                            </span>
+
+                                </div>
+                                <div class="font-size-3" style="margin:0px;">
+                                    {{object.deadline | naturalday}} <span class="text-danger">{% if object.is_expired %}(Expired) </span>
+                                    {%else%} <span class="primary-color">(Open) {%endif%}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Job specification -->
+            <div class="card p-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+
+
+                <div class="row">
+                    <h2 class="font-size-5 p-5 d-block text-gray underline">Job Specification</h2>
+                    <div class="col-12">
+                        <ul style="">
+                            <li class="mb-2 text-capitalize"><span
+                                    class="font-size-3 font-weight-bold mr-20 d-inline-block"
+                                    style="min-width:200px !important">Qualification Required</span> <span
+                                    class="inline-block font-size-3 text-end">{{object.job_education}}</span></li>
+                            <li class="mb-2 text-capitalize"><span
+                                    class="font-size-3 font-weight-bold mr-20 d-inline-block"
+                                    style="min-width:200px !important">Cover letter</span> <span
+                                    class="inline-block font-size-3 text-end">Not required</span></li>
+                            <li class="mb-2 text-capitalize"><span
+                                    class="font-size-3 font-weight-bold mr-20 d-inline-block"
+                                    style="min-width:200px !important">Preferred Age range</span> <span
+                                    class="inline-block font-size-3 text-end">{{object.job_education}}</span></li>
+                            <li class="mb-2 text-capitalize"><span
+                                    class="font-size-3 font-weight-bold mr-20 d-inline-block"
+                                    style="min-width:200px !important">Skills </span>
+                                {% for skill in object.skills.all|slice:":4" %}
+                                <span
+                                        class="inline-block font-size-3 text-end">{{skill}}</span>
+                                {%endfor %}
+                            </li>
+                            <li class="mb-2 text-capitalize"><span
+                                    class="font-size-3 font-weight-bold mr-20 d-inline-block"
+                                    style="min-width:200px !important">Job Level</span> <span
+                                    class="inline-block font-size-3 text-end">{{object.job_level}}</span></li>
+                            <li class="mb-2 text-capitalize"><span
+                                    class="font-size-3 font-weight-bold mr-20 d-inline-block"
+                                    style="min-width:200px !important">Job Category</span> <span
+                                    class="inline-block font-size-3 text-end">{{object.job_category}}</span></li>
+                            {% if object.skills.all %}
+                            <li class="mb-2 text-capitalize"><span
+                                    class="font-size-3 font-weight-bold mr-20 d-inline-block"
+                                    style="min-width:200px !important">Key Skills</span> <span
+                                    class="inline-block font-size-3 text-end">{% for skill in object.skills.all %} skill {%endfor %}</span>
+                            </li>
+                            {%endif%}
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- job description -->
+            <div class="card p-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+                <div class="row">
+                    <h2 class="font-size-5 p-5 d-block text-gray underline">Job Description</h2>
+                    <div class="col-12 font-size-3 pl-5  text-start">
+                        {{object.description}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- what we offer -->
+            <div class="card p-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+                <div class="row">
+                    <h2 class="font-size-5 p-5 d-block text-gray underline">What we Offer</h2>
+                    <div class="col-12 font-size-3 pl-5  text-start">
+                        {{object.what_we_offer}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instruction to Apply -->
+            <div class="card p-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+                <div class="row">
+                    <h2 class="font-size-5 p-5 d-block text-gray underline">Instruction to Apply</h2>
+                    <div class="col-12 font-size-3 pl-5  text-start">
+<!--                        <p class="font-size-3 mb-0 font-weight-bold p-0 text-gray">Apply Via Ulike Jobs</p>-->
+<!--                        <p class="primary-color mb-0 p-0 font-size-3 text-capitalize">OR</p>-->
+                        <p class="font-size-3 text-capitalize mb-0 text-gray fst-italic"> {{object.apply_method}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- sidebar job detail -->
+        <div class="col-md-4 mt-5 col-sm-12">
+            <div class="card mb-3 ulike-card">
+                <div class="card-header font-weight-semibold  ulike-card-header text-capitalize">
+                    <i class="fa fa-briefcase text-white"></i> &nbsp; Similar Jobs
+                </div>
+                {% for job in object.get_related_jobs%}
+                <a href="{{job.get_absolute_url}}">
+                    <div class="card-body p-4 ulike-card-body m-2 border">
+                        <div class="d-flex">
+                            <div class="border p-1" style="height:70px; width:70px">
+                                <img src="https://merojob.com/media/cache/f3/bd/f3bd711bacf511a15808560ab68becb2.jpg"
+                                     alt="">
+                            </div>
+                            <div class="ml-10">
+                                <h2 class="font-size-3 text-truncate font-weight-bold" style="margin:0px; ">
+                                    {{job.title}}</h2>
+                                <p class="font-size-2 font-weight-bold mb-2">{{job.company}}</p>
+                                <p class="font-size-2 mb-2 text-truncate">{{job.deadline}}</p>
+                                <p class="font-size-2 text-truncate"><i class="fa fa-eye"></i> Views: {{job.get_views}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

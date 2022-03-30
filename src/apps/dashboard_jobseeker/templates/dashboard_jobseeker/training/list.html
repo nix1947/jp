@@ -1,0 +1,68 @@
+{% extends 'dashboard_jobseeker/edit-profile.html' %}
+{% load crispy_forms_tags %}
+<style>
+    .nav-link {
+
+        color: black !important;
+    }
+</style>
+
+{% block edit_profile_content %}
+
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex ms-auto">
+            <div>
+                <h6><i class="far fa-edit mr-7"></i> {{object._meta.modelname}}</h6>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <div class="card-body text-center">
+        {% if not object_list %}
+        <h5 class="m-10">No Education found</h5>
+        <div class="m-10">
+            <a href="{% url 'dashboard_jobseeker:add-education' %}" class="btn btn-success p-5 flex-shrink-1"> <i
+                    class="far fa-plus-square mr-7 "></i>
+                <span>Add
+                    Education</span></a>
+        </div>
+        {% else %}
+        <div class="row">
+            {% for reference in <object_list></object_list> %}
+            <div class="col-sm-12 border-bottom mb-5 text-left">
+                <div class=" p-5 m-5">
+
+                    <h6>{{reference.reference_name}}</h6>
+
+                    <div style="font-size: .80rem; color:4efe4e">
+                        {{reference.job_title}} <br />
+                        {{reference.organization_name}}<br />
+                        {{reference.email}}<br />
+                        {{reference.contact_number}}<br />
+                    </div>
+                    <div class="text-right">
+                        <a href="{% url 'dashboard_jobseeker:edit-reference' reference.id %}"
+                            class="btn btn-outline-primary btn-sm">Edit</a>
+                        &nbsp;
+                        <a href="{% url 'dashboard_jobseeker:delete-reference' reference.id %}"
+                            class="btn btn-outline-danger btn-sm">Delete</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+            {%endfor%}
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+
+
+{% endblock edit_profile_content %}

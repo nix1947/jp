@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container" style="margin-top: 100px;">
+
+    <div style="max-width:100%; margin:auto;">
+
+        <div class="row border p-10 mb-10 mt-20" style="height:100%">
+
+            <div class="col">
+                <div style="max-height:100%">
+                      <div class="card ulike-card border p-10"  >
+                            <p class="font-size-3 p-2 f">
+                                  <span class="font-weight-bold"> Already a registered member? Log in here and</span>
+                                <br/>
+                              And find your dream job now
+
+                          </p>
+
+                    <h5 class="card-header ulike-card-header font-size-4">JobSeeker Login</h5>
+                    <div class="card-body ulike-card-body m-0" style="border-radius:0px;">
+
+                        {% if messages %}
+                        <ul class="messages bg-red text-white p-5 rounded-5" style="list-style:none">
+                            {% for message in messages %}
+                            <li class="text-white font-size-3"
+                                    {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+
+                        <form method="POST" action="{% url 'account:jobseeker-login' %}">
+                            {% csrf_token %}
+                            {{login_form | crispy }}
+                            <input type="submit" value="Login" class="btn btn-primary">
+                        </form>
+
+
+                    </div>
+
+                             <p class="font-size-3">
+                            Don't have any account yet? <a class="primary-color font-weight-bold" href="/account/jobseeker/registration">Create a new account &nbsp; </a>today !
+
+
+                        </p>
+                </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-20 border" style="height:500px;" >
+                    <h2 class="font-size-5 font-weight-bold">After Login, you can</h2>
+            <ul style="list-style:none;">
+                <li class="font-size-3 font-weight-semibold"><i class="fa primary-color mr-5 fa-check-circle"></i>Build your profile and let recruiters find you</li>
+                <li class="font-size-3 font-weight-semibold"><i class="fa primary-color mr-5 fa-check-circle"></i>Get job notification delivered right to your email</li>
+                <li class="font-size-3 font-weight-semibold"><i class="fa primary-color mr-5 fa-check-circle"></i>Find a job and grow your career</li>
+            </ul>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock content %}

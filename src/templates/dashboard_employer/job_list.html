@@ -1,0 +1,83 @@
+{% extends 'dashboard_employer/dashboard-main.html' %}
+{% load humanize %}
+{% block dashboard_content %}
+<div class="container">
+
+
+
+    <div class="mb-18">
+        <div class="row mb-11 align-items-center">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+                <h3 class="font-size-6 mb-0">Posted Jobs ({{object_list.count}})</h3>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-flex flex-wrap align-items-center justify-content-lg-end">
+                    <p class="font-size-4 mb-0 mr-6 py-2">Filter by Job:</p>
+                    <div class="h-px-48">
+                        <select name="country" id="country"
+                            class="nice-select pl-7 h-100 arrow-3 arrow-3-black min-width-px-273 font-weight-semibold text-black-2 form-control">
+                            <option value="" data-display="Product Designer">Full-Time</option>
+                            <option value="">Part Time</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-8 pt-7 rounded pb-9 px-11">
+            <div class="table-responsive ">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="pl-0 border-0 font-size-4 font-weight-normal">Name</th>
+                            <th scope="col" class="pl-4 border-0 font-size-4 font-weight-normal">Job Type</th>
+                            <th scope="col" class="pl-4 border-0 font-size-4 font-weight-normal">City</th>
+                            <th scope="col" class="pl-4 border-0 font-size-4 font-weight-normal">Created on</th>
+                            <th scope="col" class="pl-4 border-0 font-size-4 font-weight-normal">Total Applicants</th>
+                            <th scope="col" class="pl-4 border-0 font-size-4 font-weight-normal"></th>
+                            <th scope="col" class="pl-4 border-0 font-size-4 font-weight-normal"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                        <tr class="border border-color-2">
+                            <th scope="row" class="pl-6 border-0 py-7 min-width-px-235">
+                                <div class="">
+                                    <a href="jobdetails.html"
+                                        class="font-size-4 mb-0 font-weight-semibold text-black-2">
+                                        {{object.title}}</a>
+                                </div>
+                            </th>
+                            <td class="table-y-middle py-7 min-width-px-135">
+                                <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">{{object.employment_type}}
+                                </h3>
+                            </td>
+                            <td class="table-y-middle py-7 min-width-px-125">
+                                <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">
+                                    {{object.job_locations.first}}</h3>
+                            </td>
+                            <td class="table-y-middle py-7 min-width-px-155">
+                                <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">
+                                    {{object.posted_date | naturaltime}}</h3>
+                            </td>
+                            <td class="table-y-middle py-7 min-width-px-205">
+                                <!-- <h3 class="font-size-4 font-weight-bold text-black-2 mb-0">47</h3> -->
+                            </td>
+                            <td class="table-y-middle py-7 min-width-px-80">
+                                <a href="{% url 'dashboard_employer:job-update' object.pk %}"
+                                    class="font-size-3 font-weight-bold text-green text-uppercase">Edit</a>
+                            </td>
+                            <td class="table-y-middle py-7 min-width-px-100">
+                                <a href="{% url 'dashboard_employer:job-delete' object.pk %}"
+                                    class="font-size-3 font-weight-bold text-red-2 text-uppercase">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock dashboard_content %}

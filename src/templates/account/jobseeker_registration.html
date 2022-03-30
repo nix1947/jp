@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container" style="margin-top: 100px;">
+    {% if messages %}
+
+    {% endif %}
+    <div class="row">
+        <div class=" col-md-8 col-sm-12 ">
+             <div class="bg-primary text-white">
+        {% for message in messages %}
+        <li
+        {% if message.tags %} class="text-white{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </div>
+
+            <div class="card ulike-card p-8 mb-10">
+                <h1 class="font-size-6 font-weight-bold">Find a job & grow your career</h1>
+                <p class="font-size-4 font-weight-semibold">Create an ULIKE account to get recommended jobs that match
+                    your resume and apply to multiple jobs in seconds!</p>
+                <div class="card-body ulike-card-body">
+                    <form method="post" action="{% url 'account:jobseeker-registration' %}">
+                        {% csrf_token %}
+                        {{form | crispy }}
+                        <input type="submit" value="Register now" class="btn bg-primary-color text-white">
+                    </form>
+                    <div class="font-size-3 mt-5 fst-italic">By clicking on 'Register Now' below you are agreeing to the
+                        Terms and Conditions and Privacy Policy governing the use of Ulikejob.
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="row p-8 border">
+                <h2 class="primary-color font-size-5 font-weight-semibold">
+                    <i class="fa fa-search primary-color"></i>&nbsp;Create profile now and apply for Jobs with Ease!
+                </h2>
+                <p class="font-size-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur debitis
+                    ducimus eius explicabo impedit maxime minima optio, placeat reprehenderit tempore! Adipisci alias
+                    animi consectetur cum deserunt dicta hic ipsa nihil.</p>
+
+                <!-- Job Recommendations -->
+                <h2 class="primary-color font-size-5 font-weight-semibold">
+                    <i class="fa fa-briefcase primary-color"></i>&nbsp;Job Recommendation
+                </h2>
+                <p class="font-size-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, culpa,
+                    dolore, dolores earum eos esse excepturi explicabo impedit
+                    in minus nesciunt nostrum numquam provident rem sit tempora temporibus. Non, repudiandae.</p>
+
+                <h2 class="font-size-5 primary-color"><i class="fa fa-bell"></i> Job Alerts</h2>
+                <p class="font-size-3 ">Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Aliquam, commodi illum modi numquam obcaecati officia repellat unde.
+                    Amet atque deserunt distinctio dolorum eaque eius excepturi incidunt, molestias perspiciatis quam
+                    quo?</p>
+
+                <h2 class="font-size-5 primary-color"><i class="fa fa-arrow-circle-up"></i> Application Tracking</h2>
+                <p class="font-size-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam asperiores
+                    beatae blanditiis consectetur dignissimos ea et, explicabo incidunt inventore ipsam iste
+                    iusto labore nesciunt pariatur placeat, quaerat ratione temporibus vitae?</p>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock content %}

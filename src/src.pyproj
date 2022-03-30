@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2fa6b504-d104-48ae-9339-f6b92e3b4354}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <InterpreterId>Global|PythonCore|3.8-32</InterpreterId>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <DjangoSettingsModule>ulike.settings</DjangoSettingsModule>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="apps\abstract_model.py" />
+    <Compile Include="apps\account\admin.py" />
+    <Compile Include="apps\account\apps.py" />
+    <Compile Include="apps\account\decorators.py" />
+    <Compile Include="apps\account\forms.py" />
+    <Compile Include="apps\account\managers.py" />
+    <Compile Include="apps\account\migrations\0001_initial.py" />
+    <Compile Include="apps\account\migrations\0002_customuser_user_type.py" />
+    <Compile Include="apps\account\migrations\0003_company_user.py" />
+    <Compile Include="apps\account\migrations\0004_auto_20211121_1823.py" />
+    <Compile Include="apps\account\migrations\0005_auto_20211123_1535.py" />
+    <Compile Include="apps\account\migrations\0006_userprofile_job_preferences.py" />
+    <Compile Include="apps\account\migrations\0007_auto_20211124_1629.py" />
+    <Compile Include="apps\account\migrations\__init__.py" />
+    <Compile Include="apps\account\models.py" />
+    <Compile Include="apps\account\tests.py" />
+    <Compile Include="apps\account\urls.py" />
+    <Compile Include="apps\account\views.py" />
+    <Compile Include="apps\account\__init__.py" />
+    <Compile Include="apps\dashboard_employer\admin.py" />
+    <Compile Include="apps\dashboard_employer\apps.py" />
+    <Compile Include="apps\dashboard_employer\migrations\__init__.py" />
+    <Compile Include="apps\dashboard_employer\models.py" />
+    <Compile Include="apps\dashboard_employer\tests.py" />
+    <Compile Include="apps\dashboard_employer\urls.py" />
+    <Compile Include="apps\dashboard_employer\views.py" />
+    <Compile Include="apps\dashboard_employer\__init__.py" />
+    <Compile Include="apps\dashboard_jobseeker\admin.py" />
+    <Compile Include="apps\dashboard_jobseeker\apps.py" />
+    <Compile Include="apps\dashboard_jobseeker\forms.py" />
+    <Compile Include="apps\dashboard_jobseeker\migrations\__init__.py" />
+    <Compile Include="apps\dashboard_jobseeker\models.py" />
+    <Compile Include="apps\dashboard_jobseeker\tests.py" />
+    <Compile Include="apps\dashboard_jobseeker\urls.py" />
+    <Compile Include="apps\dashboard_jobseeker\views.py" />
+    <Compile Include="apps\dashboard_jobseeker\__init__.py" />
+    <Compile Include="apps\job\admin.py" />
+    <Compile Include="apps\job\apps.py" />
+    <Compile Include="apps\job\forms.py" />
+    <Compile Include="apps\job\migrations\0001_initial.py" />
+    <Compile Include="apps\job\migrations\0002_job_company.py" />
+    <Compile Include="apps\job\migrations\0003_auto_20211104_0945.py" />
+    <Compile Include="apps\job\migrations\0004_auto_20211104_1628.py" />
+    <Compile Include="apps\job\migrations\0005_auto_20211121_1823.py" />
+    <Compile Include="apps\job\migrations\__init__.py" />
+    <Compile Include="apps\job\models.py" />
+    <Compile Include="apps\job\tests.py" />
+    <Compile Include="apps\job\urls.py" />
+    <Compile Include="apps\job\views.py" />
+    <Compile Include="apps\job\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="ulike\asgi.py" />
+    <Compile Include="ulike\production_settings.py" />
+    <Compile Include="ulike\settings.py" />
+    <Compile Include="ulike\urls.py" />
+    <Compile Include="ulike\views.py" />
+    <Compile Include="ulike\wsgi.py" />
+    <Compile Include="ulike\__init__.py" />
+    <Compile Include="urls.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\dashboard-main.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\edit-profile.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\education\add.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\education\delete.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\education\list.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\education\update.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\experience\add.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\experience\delete.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\experience\list.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\experience\update.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\job_create.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\job_delete.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\job_list.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\job_update.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\language\add.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\language\delete.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\language\list.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\language\update.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\partials\_header.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\partials\_navbar.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\partials\_profile_menu.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\reference\add-reference.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\reference\delete-reference.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\reference\edit-reference.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\reference\reference.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\training\add.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\training\delete.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\training\list.html" />
+    <Content Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\training\update.html" />
+    <Content Include="media\uploads\company\profile\Untitled.png" />
+    <Content Include="media\uploads\company\profile\Untitled_Yf6VQSA.png" />
+    <Content Include="static\css\bootstrap.css" />
+    <Content Include="static\css\main.css" />
+    <Content Include="static\fonts\fontawesome-5\css\all.css" />
+    <Content Include="static\fonts\fontawesome-5\css\all.min.css" />
+    <Content Include="static\fonts\fontawesome-5\webfonts\fa-brands-400.svg" />
+    <Content Include="static\fonts\fontawesome-5\webfonts\fa-regular-400.svg" />
+    <Content Include="static\fonts\fontawesome-5\webfonts\fa-solid-900.svg" />
+    <Content Include="static\fonts\icon-font\css\icons.css" />
+    <Content Include="static\fonts\icon-font\css\nucleo.css" />
+    <Content Include="static\fonts\icon-font\css\style.css" />
+    <Content Include="static\fonts\icon-font\demo.html" />
+    <Content Include="static\fonts\icon-font\demo\css\reset.css" />
+    <Content Include="static\fonts\icon-font\demo\css\style.css" />
+    <Content Include="static\fonts\icon-font\demo\favicon.ico" />
+    <Content Include="static\fonts\icon-font\fonts\avasta.svg" />
+    <Content Include="static\fonts\icon-font\fonts\Grayic.svg" />
+    <Content Include="static\fonts\typography-font\typo.css" />
+    <Content Include="static\image\bannerimage.png" />
+    <Content Include="static\image\favicon.png" />
+    <Content Include="static\image\header-profile.png" />
+    <Content Include="static\image\l1\jpg\content-1-img1.jpg" />
+    <Content Include="static\image\l1\jpg\content-1-img2.jpg" />
+    <Content Include="static\image\l1\jpg\l1-testimonial-img1.jpg" />
+    <Content Include="static\image\l1\jpg\l1-testimonial-img2.jpg" />
+    <Content Include="static\image\l1\png\brand-light-logo-1.png" />
+    <Content Include="static\image\l1\png\brand-light-logo-2.png" />
+    <Content Include="static\image\l1\png\brand-light-logo-3.png" />
+    <Content Include="static\image\l1\png\brand-light-logo-4.png" />
+    <Content Include="static\image\l1\png\brand-light-logo-5.png" />
+    <Content Include="static\image\l1\png\brand-light-logo-6.png" />
+    <Content Include="static\image\l1\png\brand-logo-1.png" />
+    <Content Include="static\image\l1\png\brand-logo-2.png" />
+    <Content Include="static\image\l1\png\brand-logo-3.png" />
+    <Content Include="static\image\l1\png\brand-logo-4.png" />
+    <Content Include="static\image\l1\png\brand-logo-5.png" />
+    <Content Include="static\image\l1\png\brand-logo-6.png" />
+    <Content Include="static\image\l1\png\feature-brand-1.png" />
+    <Content Include="static\image\l1\png\feature-brand-2.png" />
+    <Content Include="static\image\l1\png\feature-brand-3.png" />
+    <Content Include="static\image\l1\png\feature-brand-4.png" />
+    <Content Include="static\image\l1\png\feature-brand-5.png" />
+    <Content Include="static\image\l1\png\feature-brand-6.png" />
+    <Content Include="static\image\l1\png\footer-logo.png" />
+    <Content Include="static\image\l1\png\hero-image-man.png" />
+    <Content Include="static\image\l1\png\l1-content1-img.png" />
+    <Content Include="static\image\l1\png\l1-content2-img.png" />
+    <Content Include="static\image\l1\png\l1-hero-img.png" />
+    <Content Include="static\image\l1\png\logo-black.png" />
+    <Content Include="static\image\l1\png\media-img-1.png" />
+    <Content Include="static\image\l1\png\media-img-2.png" />
+    <Content Include="static\image\l1\png\media-img-3.png" />
+    <Content Include="static\image\l1\png\message.png" />
+    <Content Include="static\image\l1\png\smal-logo1.png" />
+    <Content Include="static\image\l1\png\smal-logo2.png" />
+    <Content Include="static\image\l1\png\smal-logo3.png" />
+    <Content Include="static\image\l1\png\smal-logo4.png" />
+    <Content Include="static\image\l1\png\smal-logo5.png" />
+    <Content Include="static\image\l2\jpg\gallery-img1.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img10.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img11.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img12.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img13.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img14.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img15.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img16.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img17.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img18.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img19.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img2.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img20.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img21.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img22.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img23.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img24.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img25.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img3.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img4.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img5.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img6.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img7.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img8.jpg" />
+    <Content Include="static\image\l2\jpg\gallery-img9.jpg" />
+    <Content Include="static\image\l2\png\blog-img1.png" />
+    <Content Include="static\image\l2\png\blog-img2.png" />
+    <Content Include="static\image\l2\png\blog-img3.png" />
+    <Content Include="static\image\l2\png\blog-user-img1.png" />
+    <Content Include="static\image\l2\png\blog-user-img2.png" />
+    <Content Include="static\image\l2\png\blog-user-img3.png" />
+    <Content Include="static\image\l2\png\content-2-img1.png" />
+    <Content Include="static\image\l2\png\featured-job-logo-1.png" />
+    <Content Include="static\image\l2\png\featured-job-logo-2.png" />
+    <Content Include="static\image\l2\png\featured-job-logo-3.png" />
+    <Content Include="static\image\l2\png\featured-job-logo-4.png" />
+    <Content Include="static\image\l2\png\featured-job-logo-5.png" />
+    <Content Include="static\image\l2\png\l2-testimonial1.png" />
+    <Content Include="static\image\l2\png\l2-testimonial2.png" />
+    <Content Include="static\image\l2\png\l2-testimonial3.png" />
+    <Content Include="static\image\l2\png\logo-black.png" />
+    <Content Include="static\image\l2\png\testimonial-brand-logo1.png" />
+    <Content Include="static\image\l2\png\testimonial-brand-logo2.png" />
+    <Content Include="static\image\l3\png\asios.png" />
+    <Content Include="static\image\l3\png\content-1-img1.png" />
+    <Content Include="static\image\l3\png\content-1-img2.png" />
+    <Content Include="static\image\l3\png\content-2-img1.png" />
+    <Content Include="static\image\l3\png\content-2-img2.png" />
+    <Content Include="static\image\l3\png\content-2-img3.png" />
+    <Content Include="static\image\l3\png\fimize.png" />
+    <Content Include="static\image\l3\png\github-mark.png" />
+    <Content Include="static\image\l3\png\hero-image-1.png" />
+    <Content Include="static\image\l3\png\hero-image-2.png" />
+    <Content Include="static\image\l3\png\media-img1.png" />
+    <Content Include="static\image\l3\png\pro-img.png" />
+    <Content Include="static\image\l3\png\team-member-1.png" />
+    <Content Include="static\image\l3\png\team-member-2.png" />
+    <Content Include="static\image\l3\png\team-member-3.png" />
+    <Content Include="static\image\l3\png\team-member-4.png" />
+    <Content Include="static\image\l3\png\team-member-5.png" />
+    <Content Include="static\image\l3\png\testimonial-brand-logo.png" />
+    <Content Include="static\image\l3\png\testimonial.png" />
+    <Content Include="static\image\l3\png\universal.png" />
+    <Content Include="static\image\logo-main-black.png" />
+    <Content Include="static\image\logo-main-white.png" />
+    <Content Include="static\image\patterns\globe-pattern.png" />
+    <Content Include="static\image\patterns\globe-pattern.svg" />
+    <Content Include="static\image\patterns\hero-pattern.png" />
+    <Content Include="static\image\patterns\pattern-1.png" />
+    <Content Include="static\image\patterns\patterns\pattern-1.png" />
+    <Content Include="static\image\patterns\patterns\pattern-2.png" />
+    <Content Include="static\image\patterns\patterns\pattern-3.png" />
+    <Content Include="static\image\patterns\patterns\pattern-4.png" />
+    <Content Include="static\image\svg\404.svg" />
+    <Content Include="static\image\svg\copyright-heart-red.svg" />
+    <Content Include="static\image\svg\copyright-heart.svg" />
+    <Content Include="static\image\svg\harvard.svg" />
+    <Content Include="static\image\svg\heart.svg" />
+    <Content Include="static\image\svg\icon-briefcase.svg" />
+    <Content Include="static\image\svg\icon-clock.svg" />
+    <Content Include="static\image\svg\icon-dolor.svg" />
+    <Content Include="static\image\svg\icon-fire-rounded.svg" />
+    <Content Include="static\image\svg\icon-leaf.svg" />
+    <Content Include="static\image\svg\icon-loaction-pin-black.svg" />
+    <Content Include="static\image\svg\icon-location.svg" />
+    <Content Include="static\image\svg\icon-shark-2.svg" />
+    <Content Include="static\image\svg\icon-suitecase.svg" />
+    <Content Include="static\image\svg\icon-thunder.svg" />
+    <Content Include="static\image\svg\mit.svg" />
+    <Content Include="static\image\svg\shoot.svg" />
+    <Content Include="static\image\svg\text-asios.svg" />
+    <Content Include="static\image\svg\text-fimize.svg" />
+    <Content Include="static\image\svg\text-K.svg" />
+    <Content Include="static\image\svg\upload-file.svg" />
+    <Content Include="static\image\svg\user.svg" />
+    <Content Include="static\image\table-one-profile-image-1.png" />
+    <Content Include="static\image\table-one-profile-image-2.png" />
+    <Content Include="static\image\table-one-profile-image-3.png" />
+    <Content Include="static\image\table-one-profile-image-4.png" />
+    <Content Include="static\image\table-one-profile-image-5.png" />
+    <Content Include="static\js\custom.js" />
+    <Content Include="static\js\vendor.min.js" />
+    <Content Include="static\plugins\aos\aos.min.css" />
+    <Content Include="static\plugins\aos\aos.min.js" />
+    <Content Include="static\plugins\countdown.jquery.min.js" />
+    <Content Include="static\plugins\counter-up\jquery.counterup.js" />
+    <Content Include="static\plugins\counter-up\jquery.counterup.min.js" />
+    <Content Include="static\plugins\counter-up\jquery.waypoints.js" />
+    <Content Include="static\plugins\counter-up\jquery.waypoints.min.js" />
+    <Content Include="static\plugins\fancybox\jquery.fancybox.min.css" />
+    <Content Include="static\plugins\fancybox\jquery.fancybox.min.js" />
+    <Content Include="static\plugins\jquery\jquery-migrate.min.js" />
+    <Content Include="static\plugins\jquery\jquery.min.js" />
+    <Content Include="static\plugins\nice-select\jquery.nice-select.min.js" />
+    <Content Include="static\plugins\nice-select\nice-select.min.css" />
+    <Content Include="static\plugins\php\ajax_contact.js" />
+    <Content Include="static\plugins\slick\slick.min.css" />
+    <Content Include="static\plugins\slick\slick.min.js" />
+    <Content Include="static\plugins\ui-range-slider\jquery-ui.css" />
+    <Content Include="static\plugins\ui-range-slider\jquery-ui.js" />
+    <Content Include="templates\account\employer_login.html" />
+    <Content Include="templates\account\employer_registration.html" />
+    <Content Include="templates\account\jobseeker_login.html" />
+    <Content Include="templates\account\jobseeker_registration.html" />
+    <Content Include="templates\base.html" />
+    <Content Include="templates\candidate-profile-main.html" />
+    <Content Include="templates\candidate-profile.html" />
+    <Content Include="templates\company-profile.html" />
+    <Content Include="templates\contact.html" />
+    <Content Include="templates\dashboard-main.html" />
+    <Content Include="templates\dashboard-posted-applicants.html" />
+    <Content Include="templates\dashboard-posted-jobs.html" />
+    <Content Include="templates\dashboard-settings.html" />
+    <Content Include="templates\dashboard_employer\dashboard-main.html" />
+    <Content Include="templates\dashboard_employer\job_create.html" />
+    <Content Include="templates\dashboard_employer\job_delete.html" />
+    <Content Include="templates\dashboard_employer\job_list.html" />
+    <Content Include="templates\dashboard_employer\job_update.html" />
+    <Content Include="templates\dashboard_employer\partials\_header.html" />
+    <Content Include="templates\dashboard_employer\partials\_navbar.html" />
+    <Content Include="templates\error-404.html" />
+    <Content Include="templates\faq.html" />
+    <Content Include="templates\home-1.html" />
+    <Content Include="templates\home-2.html" />
+    <Content Include="templates\home-3.html" />
+    <Content Include="templates\index.html" />
+    <Content Include="templates\jobdetails.html" />
+    <Content Include="templates\job\job_detail.html" />
+    <Content Include="templates\job\job_search.html" />
+    <Content Include="templates\partials\_css.html" />
+    <Content Include="templates\partials\_footer.html" />
+    <Content Include="templates\partials\_js.html" />
+    <Content Include="templates\partials\_message_list.html" />
+    <Content Include="templates\partials\_meta.html" />
+    <Content Include="templates\partials\_navbar.html" />
+    <Content Include="templates\pricing-page.html" />
+    <Content Include="templates\search-grid.html" />
+    <Content Include="templates\search-list-1.html" />
+    <Content Include="templates\search-list-2.html" />
+    <Content Include="templates\search.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="apps" />
+    <Folder Include="apps\account" />
+    <Folder Include="apps\account\migrations" />
+    <Folder Include="apps\dashboard_employer" />
+    <Folder Include="apps\dashboard_employer\migrations" />
+    <Folder Include="apps\dashboard_jobseeker" />
+    <Folder Include="apps\dashboard_jobseeker\migrations" />
+    <Folder Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker" />
+    <Folder Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\education" />
+    <Folder Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\experience" />
+    <Folder Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\language" />
+    <Folder Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\partials" />
+    <Folder Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\reference" />
+    <Folder Include="apps\dashboard_jobseeker\templates\dashboard_jobseeker\training" />
+    <Folder Include="apps\job" />
+    <Folder Include="apps\job\migrations" />
+    <Folder Include="media\uploads\company\profile" />
+    <Folder Include="static\css" />
+    <Folder Include="static\fonts\fontawesome-5\css" />
+    <Folder Include="static\fonts\fontawesome-5\webfonts" />
+    <Folder Include="static\fonts\icon-font" />
+    <Folder Include="static\fonts\icon-font\css" />
+    <Folder Include="static\fonts\icon-font\demo" />
+    <Folder Include="static\fonts\icon-font\demo\css" />
+    <Folder Include="static\fonts\icon-font\fonts" />
+    <Folder Include="static\fonts\typography-font" />
+    <Folder Include="static\image" />
+    <Folder Include="static\image\l1\jpg" />
+    <Folder Include="static\image\l1\png" />
+    <Folder Include="static\image\l2\jpg" />
+    <Folder Include="static\image\l2\png" />
+    <Folder Include="static\image\l3\png" />
+    <Folder Include="static\image\patterns" />
+    <Folder Include="static\image\patterns\patterns" />
+    <Folder Include="static\image\svg" />
+    <Folder Include="static\js" />
+    <Folder Include="static\plugins" />
+    <Folder Include="static\plugins\aos" />
+    <Folder Include="static\plugins\counter-up" />
+    <Folder Include="static\plugins\fancybox" />
+    <Folder Include="static\plugins\jquery" />
+    <Folder Include="static\plugins\nice-select" />
+    <Folder Include="static\plugins\php" />
+    <Folder Include="static\plugins\slick" />
+    <Folder Include="static\plugins\ui-range-slider" />
+    <Folder Include="templates" />
+    <Folder Include="templates\account" />
+    <Folder Include="templates\dashboard_employer" />
+    <Folder Include="templates\dashboard_employer\partials" />
+    <Folder Include="templates\job" />
+    <Folder Include="templates\partials" />
+    <Folder Include="ulike" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.8-32" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+    <WebProjectProperties>
+        <AutoAssignPort>True</AutoAssignPort>
+        <UseCustomServer>True</UseCustomServer>
+        <CustomServerUrl>http://localhost</CustomServerUrl>
+        <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+    </WebProjectProperties>
+    </FlavorProperties>
+    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+    <WebProjectProperties>
+        <StartPageUrl>
+        </StartPageUrl>
+        <StartAction>CurrentPage</StartAction>
+        <AspNetDebugging>True</AspNetDebugging>
+        <SilverlightDebugging>False</SilverlightDebugging>
+        <NativeDebugging>False</NativeDebugging>
+        <SQLDebugging>False</SQLDebugging>
+        <ExternalProgram>
+        </ExternalProgram>
+        <StartExternalURL>
+        </StartExternalURL>
+        <StartCmdLineArguments>
+        </StartCmdLineArguments>
+        <StartWorkingDirectory>
+        </StartWorkingDirectory>
+        <EnableENC>False</EnableENC>
+        <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+    </WebProjectProperties>
+    </FlavorProperties>
+</VisualStudio>
+  </ProjectExtensions>
+</Project>

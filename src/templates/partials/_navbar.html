@@ -1,0 +1,271 @@
+{% load static %}
+<!-- Header Area -->
+<header style="margin-bottom: 50px !important;"
+    class="
+    site-header site-header--menu-right dynamic-sticky-bg py-7 py-lg-0 site-header--absolute site-header--sticky reveal-headercs scrolling reveal-header">
+    <div class="container">
+        <nav class="navbar site-navbar  offcanvas-active navbar-expand-lg   px-0 py-0">
+            <!-- Brand Logo-->
+            <div class="brand-logo">
+                <a href="/" style="font-size:2rem; color: orange">
+                    <!-- light version logo (logo must be black)-->
+<!--                    <img src="{% static 'image/logo-main-black.png' %}" alt="" class="light-version-logo default-logo">-->
+                    <!-- Dark version logo (logo must be White)-->
+<!--                    <img src="{% static 'image/logo-main-white.png' %}" alt="" class="dark-version-logo">-->
+                    ULIKE
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="mobile-menu">
+                <div class="navbar-nav-wrapper">
+
+
+                    <ul class="navbar-nav main-menu">
+                        <!-- 
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle gr-toggle-arrow" id="navbarDropdown" href="#features"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home <i
+                                    class="icon icon-small-down"></i></a>
+                            <ul class="gr-menu-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="drop-menu-item">
+                                    <a href="home-1.html">
+                                        Jobs
+                                    </a>
+                                </li>
+                                <li class="drop-menu-item">
+                                    <a href="home-2.html">
+                                        Companies
+                                    </a>
+                                </li>
+                                <li class="drop-menu-item">
+                                    <a href="home-3.html">
+                                        Services
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle gr-toggle-arrow" id="navbarDropdown2" href="#features"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages <i
+                                    class="icon icon-small-down"></i></a>
+                            <ul class="gr-menu-dropdown dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li class="drop-menu-item dropdown">
+                                    <a class="dropdown-toggle gr-toggle-arrow" id="navbarDropdown242" href="#"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Job Pages
+                                        <i class="icon icon-small-down"></i>
+                                    </a>
+                                    <ul class="gr-menu-dropdown dropdown-menu dropdown-left"
+                                        aria-labelledby="navbarDropdown242">
+                                        <li class="drop-menu-item">
+                                            <a href="./search-grid.html">
+                                                Job Grid
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./search-list-1.html">
+                                                Job List
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./jobdetails.html">
+                                                Job Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="drop-menu-item dropdown">
+                                    <a class="dropdown-toggle gr-toggle-arrow" id="navbarDropdown21" href="#"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dashboard
+                                        <i class="icon icon-small-down"></i>
+                                    </a>
+                                    <ul class="gr-menu-dropdown dropdown-menu dropdown-left"
+                                        aria-labelledby="navbarDropdown21">
+                                        <li class="drop-menu-item">
+                                            <a href="./dashboard-main.html">
+                                                Dashboard Main
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./dashboard-settings.html">
+                                                Dashboard Settings
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./dashboard-posted-applicants.html">
+                                                Dashboard Applicants
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./dashboard-posted-applicants.html">
+                                                Dashboard Posted Jobs
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="drop-menu-item dropdown">
+                                    <a class="dropdown-toggle gr-toggle-arrow" id="navbarDropdown25g" href="#"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Candidate Pages
+                                        <i class="icon icon-small-down"></i>
+                                    </a>
+                                    <ul class="gr-menu-dropdown dropdown-menu dropdown-left"
+                                        aria-labelledby="navbarDropdown25g">
+                                        <li class="drop-menu-item">
+                                            <a href="./candidate-profile-main.html">
+                                                Candidate Profile
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./candidate-profile.html">
+                                                Candidate Profile 02
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="drop-menu-item dropdown">
+                                    <a class="dropdown-toggle gr-toggle-arrow" id="navbarDropdown242" href="#"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Search Pages
+                                        <i class="icon icon-small-down"></i>
+                                    </a>
+                                    <ul class="gr-menu-dropdown dropdown-menu dropdown-left"
+                                        aria-labelledby="navbarDropdown242">
+                                        <li class="drop-menu-item">
+                                            <a href="./search-grid.html">
+                                                Search Grid
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./search-list-1.html">
+                                                Search List 01
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./search-list-2.html">
+                                                Search List 02
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="drop-menu-item">
+                                    <a href="./company-profile.html">
+                                        Company Profile
+                                    </a>
+                                </li>
+                                <li class="drop-menu-item dropdown">
+                                    <a class="dropdown-toggle gr-toggle-arrow" id="navbarDropdown26" href="#"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Essential
+                                        <i class="icon icon-small-down"></i>
+                                    </a>
+                                    <ul class="gr-menu-dropdown dropdown-menu dropdown-left"
+                                        aria-labelledby="navbarDropdown26">
+                                        <li class="drop-menu-item">
+                                            <a href="faq.html">
+                                                Faq
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./error-404.html">
+                                                404
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./pricing-page.html">
+                                                Pricing page
+                                            </a>
+                                        </li>
+                                        <li class="drop-menu-item">
+                                            <a href="./contact.html">Contact</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://grayic.com/html-support/">Job</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://grayic.com/html-support/">Companies</a>
+                        </li>
+
+
+
+
+
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle gr-toggle-arrow" id="navbarDropdown" href="#features"
+                                role="button" data-toggle="dropdown"
+                                aria-expanded="false"> <i class="fa fa-user-alt "></i>&nbsp;JobSeeker</a>
+                            <ul class="gr-menu-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <li class="drop-menu-item">
+                            <a class="nav-link" href="{% url 'account:jobseeker-registration' %}"><i class="fa fa-user-plus"></i>&nbsp; Register</a>
+                        </li>
+
+                        <li class="drop-menu-item">
+                            <a class="nav-link " href="{% url 'account:jobseeker-login' %}"><i class="fa fa-user"></i>&nbsp; Login</a>
+                        </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle gr-toggle-arrow" id="navbarDropdown" href="#features"
+                                role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><i class="fa fa-building "></i> &nbsp; Employer zone </a>
+                            <ul class="gr-menu-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="drop-menu-item">
+                                    <a href="{% url 'account:employer-login' %}">
+                                      <i class="fa fa-sign"></i>  Login
+                                    </a>
+                                </li>
+                                <li class="drop-menu-item">
+                                    <a href="{% url 'account:employer-registration' %}">
+                                    &nbsp;  <i class="fa fa-user-plus primary-color"></i>  Register
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+                <button class="d-block d-lg-none offcanvas-btn-close focus-reset" type="button" data-toggle="collapse"
+                    data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="true"
+                    aria-label="Toggle navigation">
+                    <i class="gr-cross-icon"></i>
+                </button>
+            </div>
+            <div class="header-btns header-btn-devider ml-auto pr-2 ml-lg-6 d-none d-xs-flex">
+
+
+
+
+
+
+
+            </div>
+            <!-- Mobile Menu Hamburger-->
+            <button class="navbar-toggler btn-close-off-canvas  hamburger-icon border-0" type="button"
+                data-toggle="collapse" data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <!-- <i class="icon icon-simple-remove icon-close"></i> -->
+                <span class="hamburger hamburger--squeeze js-hamburger">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </span>
+            </button>
+            <!--/.Mobile Menu Hamburger Ends-->
+        </nav>
+    </div>
+</header>
+<!-- navbar- -->

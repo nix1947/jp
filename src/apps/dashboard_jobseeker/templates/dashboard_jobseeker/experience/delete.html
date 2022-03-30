@@ -1,0 +1,21 @@
+{% extends 'dashboard_jobseeker/edit-profile.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block edit_profile_content %}
+
+<div class="card">
+    <div class="card-header ulike-card-header">
+        <h2 class="font-size-4 text-white"><i class="far fa-trash mr-7"></i>Delete Experience  </h2>
+    </div>
+    <div class="card-body ulike-card-body m-5">
+        <form method="POST" action="">
+            {%csrf_token%}
+            <p class="p-5 text-white rounded  bg-danger text-dark">Are you sure to delete {{object}}</p>
+            <input type="hidden" name="id" value={{object.id}}>
+            <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+    </div>
+</div>
+
+{% endblock edit_profile_content %}
