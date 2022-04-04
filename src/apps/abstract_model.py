@@ -10,6 +10,10 @@ class AbstractBaseModel(models.Model):
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     uuid = models.UUIDField(db_index=True, default=uuid.uuid4, editable=False)
+    # created_by
+    # updated_by
+    # approved_by
+    # is_approved
 
     class Meta:
         abstract = True

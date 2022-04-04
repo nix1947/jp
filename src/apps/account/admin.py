@@ -19,7 +19,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        exclude = ('user_type',)
         # fields = ('email', 'password', 'user_type', 'is_active', 'is_staff', 'is_superuser')
 
     def clean_password2(self):
@@ -82,12 +82,17 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(UserProfile)
 admin.site.register(Company)
-admin.site.register(CustomUser, UserAdmin)
+
 admin.site.register(Education)
 admin.site.register(Training)
 admin.site.register(Reference)
 admin.site.register(WorkExperience)
 admin.site.register(Language)
+
+
+@admin.register(CustomUser)
+class AdminCustomUser(admin.ModelAdmin):
+    exclude = ('user_type',)
 
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.

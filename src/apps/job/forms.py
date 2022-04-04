@@ -10,7 +10,8 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job 
         fields = (
-            'title', 
+            'is_draft',
+            'title',
             'description',
             'job_category', 
             'employment_type',
@@ -25,6 +26,7 @@ class JobForm(forms.ModelForm):
             'what_we_offer',
             'apply_method',
             'deadline',
+
             )
 
 

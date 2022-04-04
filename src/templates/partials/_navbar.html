@@ -1,17 +1,17 @@
 {% load static %}
 <!-- Header Area -->
 <header style="margin-bottom: 50px !important;"
-    class="
+        class="
     site-header site-header--menu-right dynamic-sticky-bg py-7 py-lg-0 site-header--absolute site-header--sticky reveal-headercs scrolling reveal-header">
     <div class="container">
         <nav class="navbar site-navbar  offcanvas-active navbar-expand-lg   px-0 py-0">
             <!-- Brand Logo-->
             <div class="brand-logo">
-                <a href="/" style="font-size:2rem; color: orange">
+                <a href="/" class="font-size-6 primary-color font-weight-semibold"  style="font-size:2rem; color: orange">
                     <!-- light version logo (logo must be black)-->
-<!--                    <img src="{% static 'image/logo-main-black.png' %}" alt="" class="light-version-logo default-logo">-->
+                    <!--          <img src="{% static 'image/logo-main-black.png' %}" alt="" class="light-version-logo default-logo">-->
                     <!-- Dark version logo (logo must be White)-->
-<!--                    <img src="{% static 'image/logo-main-white.png' %}" alt="" class="dark-version-logo">-->
+                    <!--                    <img src="{% static 'image/logo-main-white.png' %}" alt="" class="dark-version-logo">-->
                     ULIKE
                 </a>
             </div>
@@ -193,70 +193,100 @@
                             <a class="nav-link" href="https://grayic.com/html-support/">Companies</a>
                         </li>
 
-
-
-
-
+                        {% if not request.user.is_authenticated %}
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle gr-toggle-arrow" id="navbarDropdown" href="#features"
-                                role="button" data-toggle="dropdown"
-                                aria-expanded="false"> <i class="fa fa-user-alt "></i>&nbsp;JobSeeker</a>
+                               role="button" data-toggle="dropdown"
+                               aria-expanded="false"> <i class="fa fa-user-alt "></i>&nbsp;JobSeeker</a>
                             <ul class="gr-menu-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
 
-                        <li class="drop-menu-item">
-                            <a class="nav-link" href="{% url 'account:jobseeker-registration' %}"><i class="fa fa-user-plus"></i>&nbsp; Register</a>
-                        </li>
+                                <li class="drop-menu-item">
+                                    <a class="nav-link" href="{% url 'account:jobseeker-registration' %}"><i
+                                            class="fa fa-user-plus"></i>&nbsp; Register</a>
+                                </li>
 
-                        <li class="drop-menu-item">
-                            <a class="nav-link " href="{% url 'account:jobseeker-login' %}"><i class="fa fa-user"></i>&nbsp; Login</a>
-                        </li>
+                                <li class="drop-menu-item">
+                                    <a class="nav-link " href="{% url 'account:jobseeker-login' %}"><i
+                                            class="fa fa-user"></i>&nbsp; Login</a>
+                                </li>
 
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle gr-toggle-arrow" id="navbarDropdown" href="#features"
-                                role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"><i class="fa fa-building "></i> &nbsp; Employer zone </a>
+                               role="button" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false"><i class="fa fa-building "></i> &nbsp; Employer zone </a>
                             <ul class="gr-menu-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="drop-menu-item">
                                     <a href="{% url 'account:employer-login' %}">
-                                      <i class="fa fa-sign"></i>  Login
+                                        <i class="fa fa-sign"></i> Login
                                     </a>
                                 </li>
                                 <li class="drop-menu-item">
                                     <a href="{% url 'account:employer-registration' %}">
-                                    &nbsp;  <i class="fa fa-user-plus primary-color"></i>  Register
+                                        &nbsp; <i class="fa fa-user-plus primary-color"></i> Register
                                     </a>
                                 </li>
 
                             </ul>
                         </li>
 
+                        {% else %}
 
+                           <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle gr-toggle-arrow" id="navbarDropdown" href="#features"
+                               role="button" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false"><i class="fa fa-caret-down "></i> {{request.user.profile.full_name}} </a>
+                            <ul class="gr-menu-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="drop-menu-item">
+                                    <a class="text-uppercase" href="{{request.user.logout}}">
+                                        <i class="fa fa-sign-out"></i> &nbsp;Logout
+                                    </a>
+                                </li>
+                                <li class="drop-menu-item">
+                                    <a class="text-uppercase" href="{{request.user.dashboard}}">
+                                        <i class="fa fa-tachometer"></i>&nbsp;Dashboard
+                                    </a>
+                                </li>
+
+                                <!-- TODO
+                                <li class="drop-menu-item">
+                                    <a class="text-uppercase" href="{{request.user.profile}}">
+                                        <i class="fa fa-user"></i>&nbsp;Profile
+                                    </a>
+                                </li>
+
+                                <li class="drop-menu-item">
+                                    <a class="text-uppercase" href="{{request.user.change_password}}">
+                                        <i class="fa fa-lock"></i>&nbsp;Change Password
+                                    </a>
+                                </li>
+
+                                -->
+
+                            </ul>
+                        </li>
+
+                        {%endif %}
 
 
                     </ul>
                 </div>
                 <button class="d-block d-lg-none offcanvas-btn-close focus-reset" type="button" data-toggle="collapse"
-                    data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="true"
-                    aria-label="Toggle navigation">
+                        data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="true"
+                        aria-label="Toggle navigation">
                     <i class="gr-cross-icon"></i>
                 </button>
             </div>
             <div class="header-btns header-btn-devider ml-auto pr-2 ml-lg-6 d-none d-xs-flex">
 
 
-
-
-
-
-
             </div>
             <!-- Mobile Menu Hamburger-->
             <button class="navbar-toggler btn-close-off-canvas  hamburger-icon border-0" type="button"
-                data-toggle="collapse" data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="false"
-                aria-label="Toggle navigation">
+                    data-toggle="collapse" data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <!-- <i class="icon icon-simple-remove icon-close"></i> -->
                 <span class="hamburger hamburger--squeeze js-hamburger">
                     <span class="hamburger-box">

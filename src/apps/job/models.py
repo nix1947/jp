@@ -49,12 +49,13 @@ class Industry(AbstractBaseModel):
 
 
 class Job(AbstractBaseModel):
-    company = models.ForeignKey('account.Company', on_delete=models.SET_NULL, null=True)
+    company = models.ForeignKey('account.Company', on_delete=models.SET_NULL, null=True, verbose_name='Draft')
     title = models.CharField(max_length=255, verbose_name=_('Job title'), help_text=_("IT manager"))
     description = models.TextField(verbose_name=_('Job description'))
     posted_date = models.DateTimeField(auto_now_add=True, verbose_name=_("Posted Date"))
     specification = models.TextField(verbose_name=_("Job specification"))
     job_category = models.ForeignKey(Category, null=True, related_name="job_categories", on_delete=models.SET_NULL)
+    is_approved = models.BooleanField(default=False)
     no_of_vacancies = models.PositiveIntegerField(default=1, help_text='10', verbose_name=_("No of Vacancies"))
     employment_type = models.CharField(
         choices=(
@@ -135,10 +136,20 @@ class Job(AbstractBaseModel):
 
     @property
     def is_expired(self):
-        return (datetime.utcnow().replace(tzinfo=pytz.UTC) - self.deadline).days > 0
+        return (self.deadline - datetime.utcnow().replace(tzinfo=pytz.UTC)).days < 0
 
     def get_views(self):
         return (datetime.utcnow().replace(tzinfo=pytz.UTC) - self.posted_date).days + 5
+
+    def status(self):
+        if self.is_expired:
+            return 'Expired'
+        elif self.is_draft:
+            return 'Draft'
+        elif self.is_approved and not self.is_expired:
+            return 'Active'
+        elif not self.is_approved and not self.is_draft:
+            return 'Pending'
 
     @property
     def get_related_jobs(self):
@@ -147,6 +158,3 @@ class Job(AbstractBaseModel):
             Q(job_category=self.job_category) |
             Q(job_industry=self.job_industry)
         ).distinct()[:7]
-
-
-

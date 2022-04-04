@@ -16,10 +16,25 @@
                 class="icon icon-layout-11 mr-7"></i>Dashboard</a></li>
         <li class=""><a href="{% url 'dashboard_jobseeker:profile' request.user.id %}"
                         class="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center"><i
-                class="fa fa-user mr-7"></i>Profile</a></li>
+                class="fa fa-user mr-7"></i>Profile</a>
+            <ul class="list-unstyled ml-15">
+                <div class="mb-6"><a class=" pl-2 font-size-3  flex-y-center" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#personal"><i class="fa fa-user"></i>&nbsp;Personal Details</a></div>
+                <div class="mb-6"><a class=" pl-2 font-size-3  flex-y-center" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#education"><i class="fa fa-university"></i>&nbsp;Education Details</a></div>
+                <div class="mb-6"><a class=" pl-2 font-size-3  flex-y-center" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#working"><i class="fa fa-flask"></i>&nbsp;Working Experience Details</a></div>
+
+                <div class="mb-6"><a class=" pl-2 font-size-3  flex-y-center" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#trainings"><i class="fa fa-vials"></i>&nbsp;Training Details</a></div>
+                <div class="mb-6"><a class=" pl-2 font-size-3  flex-y-center" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#languages"><i class="fa fa-globe-asia"></i>&nbsp;Language Details</a></div>
+                <div class="mb-6"><a class=" pl-2 font-size-3  flex-y-center" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#references"><i class="fa fa-people-arrows"></i>&nbsp;Reference Details</a></div>
+
+
+            </ul>
+
+        </li>
+
+
         <li class=""><a href="dashboard-posted-applicants.html"
                         class="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center"><i
-                class="fas fa-user mr-7"></i>Applicantssss <span
+                class="fas fa-user mr-7"></i>MY CV <span
                 class="ml-auto px-1 h-1 bg-dodger text-white font-size-3 rounded-5 max-height-px-18 flex-all-center">14</span></a>
         </li>
         <li class=""><a href="{% url 'dashboard_jobseeker:edit-profile' request.user.profile.id %}"

@@ -1,44 +1,16 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.core.mail import send_mail
 from django.db import transaction
-from django.shortcuts import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
 
 from apps.account.models import Company, UserProfile, CustomUser
 from . import usertype
-
-from .forms import EmployerLoginForm, EmployerLoginForm, EmployerRegistrationForm, JobSeekerLoginForm, \
+from .forms import EmployerLoginForm, EmployerRegistrationForm, JobSeekerLoginForm, \
     JobSeekerRegistrationForm
 
-
-class LoginView(FormView):
-    form_class = JobSeekerLoginForm
-    template_name = 'account/jobseeker_login.html'
-
-    def form_valid(self, form):
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-
-        user = authenticate(self.request, email=email, password=password)
-        print(dir(user))
-        return HttpResponse(dir(user))
-
-        if user is not None:
-            # Add to session 
-            login(self.request, user)
-
-            if user.user_type == 'employer':
-                return redirect('dashboard_employer:dashboard')
-            elif user.user_type == 'js':
-                return redirect('dashboard_jobseeker:dashboard')
-
-        else:
-            messages.add_message(self.request, messages.ERROR, 'Invalid username or password',
-                                 extra_tags="alert-danger")
-            return 'account:login'
+from django.contrib.auth.views import PasswordChangeView as DjangoAdminPasswordChangeView
 
 
 def jobseeker_login(request):
@@ -72,8 +44,8 @@ def jobseeker_login(request):
 
 
 def jobseeker_registration(request):
-    # if request.user.is_authenticated:
-    #     return redirect('dashboard_jobseeker:dashboard')
+    if request.user.is_authenticated:
+        return redirect('dashboard_jobseeker:dashboard')
     form = JobSeekerRegistrationForm()
 
     if request.method == "POST":
@@ -81,7 +53,7 @@ def jobseeker_registration(request):
         if form.is_valid():
 
             with transaction.atomic():
-                # User fields 
+                # User fields
                 user = form.save(commit=False)
                 user.user_type = usertype.JOBSEEKER
                 # TODO: change is_active to False for enabling email verification
@@ -89,10 +61,10 @@ def jobseeker_registration(request):
                 user = CustomUser.objects.create_user(email=user.email, password=user.password,
                                                       user_type=user.user_type,
                                                       is_active=user.is_active)
-                # user.set_password(user.password)
-                # user.save()
+                user.set_password(user.password)
+                user.save()
 
-                # User profile 
+                # User profile
                 user_profile = UserProfile(
                     user=user,
                     full_name=form.cleaned_data["full_name"],
@@ -100,31 +72,23 @@ def jobseeker_registration(request):
                 )
 
                 user_profile.save()
-                request.email = 'maiilifno'
-
+                # TODO: pass the email sent by the user.
             return redirect("account:registered-email-verification", email=user.email)
 
         else:
             return render(request, 'account/jobseeker_registration.html', {
                 'form': form
             })
-
     return render(request, 'account/jobseeker_registration.html', {
         'form': form
     })
 
 
-def email_verification(request, email):
-    return render(request, 'account/email_verification.html', context={
-        'email': email
-    })
-
-
 def employer_login(request):
-    if request.user.is_authenticated and request.user.user_type == 'employer':
+    if request.user.is_authenticated and request.user.user_type == usertype.EMPLOYER:
         return redirect('dashboard_employer:dashboard')
 
-    elif request.user.is_authenticated and request.user.user_type == 'js':
+    elif request.user.is_authenticated and request.user.user_type == usertype.JOBSEEKER:
         return redirect('dashboard_jobseeker:dashboard')
 
     form = EmployerLoginForm()
@@ -134,8 +98,9 @@ def employer_login(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = authenticate(request, email=email, password=password)
-            if user is not None and user.user_type == 'employer':
+            if user is not None and user.user_type == usertype.EMPLOYER:
                 login(request, user)
+                messages.add_message(request, level=messages.SUCCESS, message="Successfully logged in")
                 return redirect('dashboard_employer:dashboard')
             else:
                 messages.add_message(request, level=messages.ERROR, message="Invalid email or password")
@@ -154,10 +119,10 @@ def employer_login(request):
 
 
 def employer_registration(request):
-    # if request.user.is_authenticated and request.user.user_type == 'employer':
-    #     return redirect('dashboard_employer:dashboard')
-    # elif request.user.is_authenticated and request.user.user_type == 'js':
-    #     return redirect('dashboard_employer:dashboard')
+    if request.user.is_authenticated and request.user.user_type == usertype.EMPLOYER:
+        return redirect('dashboard_employer:dashboard')
+    elif request.user.is_authenticated and request.user.user_type == usertype.JOBSEEKER:
+        return redirect('dashboard_employer:dashboard')
 
     form = EmployerRegistrationForm()
     if request.method == "POST":
@@ -168,11 +133,12 @@ def employer_registration(request):
             with transaction.atomic():
                 # User attribute
                 user = form.save(commit=False)
-                user.user_type = 'employer'
+                user.user_type = usertype.EMPLOYER
+                # TODO: make True to enable email verification.
                 user.is_active = False
                 user.save()
 
-                # Company Profile 
+                # Company Profile
                 company = Company(user=user, organization_name=organization_name)
                 company.save()
 
@@ -185,3 +151,20 @@ def employer_registration(request):
     return render(request, 'account/employer_registration.html', {
         'form': form
     })
+
+
+def email_verification(request, email):
+    return render(request, 'account/email_verification.html', context={
+        'email': email
+    })
+
+
+def logout(request):
+    request.session.destroy()
+    return HttpResponseRedirect('/')
+
+
+class PasswordChangeView(DjangoAdminPasswordChangeView):
+    success_url = reverse_lazy('account:password_change_done')
+    template_name = 'account/password_change_form.html'
+    title = 'Password Change'

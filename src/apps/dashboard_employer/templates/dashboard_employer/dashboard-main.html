@@ -21,15 +21,9 @@
 
     <div class="container">
       {% block messages %}
-      {% if messages %}
-      <div class="alert text-left p-2 alert-white alert-dismissible fade show" role="alert">
-        {% for message in messages %}
-        <p class="text-{{message.tags}}">{{message}}</p>
 
-        {% endfor %}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      {% endif %}
+        {% include 'partials/_message.html' %}
+
       {%endblock messages%}
     </div>
     {% block dashboard_content %}
@@ -37,30 +31,32 @@
       <div class="row mb-7">
         <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
           <!-- Single Category -->
-          <a href="#" class="media bg-white rounded-4 pl-8 pt-9 pb-9 pr-7 hover-shadow-1 mb-9 shadow-8">
+          <a href="{% url 'dashboard_employer:job-active' %}" class="media bg-white rounded-4 pl-8 pt-9 pb-9 pr-7 hover-shadow-1 mb-9 shadow-8">
             <div class="text-blue bg-blue-opacity-1 circle-56 font-size-6 mr-7">
               <i class="fas fa-briefcase"></i>
             </div>
             <!-- Category Content -->
             <div class="">
               <h5 class="font-size-8 font-weight-semibold text-black-2 line-height-reset font-weight-bold mb-1"><span
-                  class="counter">{{posted_jobs}}</span></h5>
-              <p class="font-size-4 font-weight-normal text-gray mb-0">Posted Jobs</p>
+                  class="counter">
+                {{request.user.company.active_jobs | length}}
+              </span></h5>
+              <p class="font-size-4 font-weight-normal text-gray mb-0">Active Jobs</p>
             </div>
           </a>
           <!-- End Single Category -->
         </div>
         <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
           <!-- Single Category -->
-          <a href="#" class="media bg-white rounded-4 pl-8 pt-9 pb-9 pr-7 hover-shadow-1 mb-9 shadow-8">
+          <a href="{% url 'dashboard_employer:job-pending' %}" class="media bg-white rounded-4 pl-8 pt-9 pb-9 pr-7 hover-shadow-1 mb-9 shadow-8">
             <div class="text-pink bg-pink-opacity-1 circle-56 font-size-6 mr-7">
               <i class="fas fa-user"></i>
             </div>
             <!-- Category Content -->
             <div class="">
               <h5 class="font-size-8 font-weight-semibold text-black-2 line-height-reset font-weight-bold mb-1"><span
-                  class="counter">{{total_applicants}}</span></h5>
-              <p class="font-size-4 font-weight-normal text-gray mb-0">Total Applicants</p>
+                  class="counter">{{request.user.company.pending_jobs|length}}</span></h5>
+              <p class="font-size-4 font-weight-normal text-gray mb-0">Pending Jobs</p>
             </div>
           </a>
           <!-- End Single Category -->

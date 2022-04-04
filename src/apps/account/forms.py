@@ -141,3 +141,10 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = '__all__'
+
+
+# UserProfile form.
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ('is_active', 'is_deleted', 'user',)

@@ -6,7 +6,7 @@
 
 <div class="card">
     <div class="card-header ulike-card-header">
-        <h2 class="font-size-4 text-white"><i class="far fa-trash mr-7"></i>Delete Education  </h2>
+        <h2 class="font-size-4 text-white"><i class="far fa-trash mr-7"></i>Delete Reference  </h2>
     </div>
     <div class="card-body ulike-card-body m-5">
         <form method="POST" action="">
@@ -14,7 +14,6 @@
             <p class="p-5 text-white rounded  bg-danger text-dark">Are you sure to delete {{object}}</p>
             <input type="hidden" name="id" value={{object.id}}>
             <input type="submit" value="Delete" class="btn btn-danger">
-            <a type="submit" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#education"" class="btn btn-success">
         </form>
     </div>
 </div>

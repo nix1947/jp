@@ -2,10 +2,16 @@ from django.urls import path
 
 from .views import (
     dashboard, editprofile, profile_detail,
-    ReferenceEditView,
+
+    # ProfileEdit
+    ProfileEditView,
+    profile_reference,
+    CvDetailView,
+
+    # ReferenceView
+    ReferenceUpdateView,
     ReferenceDetailView,
     ReferenceCreateView,
-    profile_reference,
     ReferenceDeleteView,
 
     # Language
@@ -37,13 +43,15 @@ app_name = "dashboard_jobseeker"
 urlpatterns = [
     path('', dashboard, name="dashboard"),
     path('profile/detail/<int:pk>', profile_detail, name='profile'),
-    path('profile/edit/<int:pk>', editprofile, name='edit-profile'),
+    path('profile/edit/<int:pk>', ProfileEditView.as_view(), name='edit-profile'),
+    path('profile/cv/<int:pk>', CvDetailView.as_view(), name='cv'),
 
     # Reference form.
 
     path('profile/reference', profile_reference, name='profile-reference'),
+    path('profile/reference/add/', ReferenceCreateView.as_view(), name='create-reference'),
     path('profile/reference/add/', ReferenceCreateView.as_view(), name='add-reference'),
-    path('profile/reference/edit/<int:pk>', ReferenceEditView.as_view(), name='edit-reference'),
+    path('profile/reference/edit/<int:pk>', ReferenceUpdateView.as_view(), name='edit-reference'),
     path('profile/reference/delete/<int:pk>', ReferenceDeleteView.as_view(), name='delete-reference'),
     path('profile/reference/detail/<int:pk>', ReferenceDetailView.as_view(), name='detail-reference'),
 

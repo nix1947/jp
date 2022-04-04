@@ -2,7 +2,6 @@
 {% load crispy_forms_tags %}
 
 
-
 {% block dashboard_content %}
 
 
@@ -10,47 +9,45 @@
 
 
     <!-- Navbar -->
+    {% comment %}
     <div class="bg-primary-color text-white p-6 font-size-3 mb-5">
         <div class=" p-2 d-flex flex-wrap justify-content-between">
             <div class="m-3 border p-3 flex-sm-fill ">
-                <a class="text-white" href="">Personal Details</a>
+                <a class="text-white" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#personal"><i class="fa fa-user"></i>&nbsp;Personal Details</a>
             </div>
             <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">Resume</a>
+                <a class="text-white" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#resume"><i class="fa fa-document"></i>&nbsp;Resume</a>
+            </div>
+
+            <div class="m-3 border p-3 flex-sm-fill">
+                 <a class="text-white" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#education">Education</a>
             </div>
             <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">EmploymentDetails</a>
+                <a class="text-white" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#working">Working Details</a>
             </div>
             <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">Job Preferences</a>
+               <a class="text-white" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#languages">Languages</a>
             </div>
             <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">Languages</a>
+             <a class="text-white" href="{% url 'dashboard_jobseeker:profile' request.user.profile.id %}#references">References</a>
             </div>
-            <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">Certifications</a>
-            </div>
-            <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">Documents</a></div>
-            <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">Education</a></div>
-            <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">References</a>
-            </div>
-            <div class="m-3 border p-3 flex-sm-fill">
-                <a href="#" class="text-white">References</a>
-            </div>
+
+
 
         </div>
     </div>
 
+    {% endcomment %}
+
     <!-- Personal Details -->
+    <div id="personal">
     <div class="card ulike-card mb-5">
         <div class="card-header ulike-card-header font-size-4">
             <div class="d-flex">
                 <div class="font-size-4 w-100">Personal Details</div>
-                  <div>
-                                    <div><a href="" class="btn btn-orange"><i class="fa fa-pen"></i>&nbsp;Edit</a></div>
+                <div>
+                    <div><a href="{% url 'dashboard_jobseeker:edit-profile' request.user.profile.id %}"
+                            class="btn btn-orange"><i class="fa fa-pen"></i>&nbsp;Edit</a></div>
                 </div>
 
             </div>
@@ -62,56 +59,73 @@
                     <li class="font-size-3 "><span style="min-width:300px;"
                                                    class="font-weight-semibold text-dark">Name:</span> <span
                             class="ml-20">{{request.user.profile.full_name}}</span></li>
-                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Current Address:</span>
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Current Address:</span>
                         <span class="ml-20">{{request.user.profile.current_address}}</span></li>
-                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Permanent Address:</span>
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Permanent Address:</span>
                         <span class="ml-20">{{request.user.profile.permanent_address}}</span></li>
-                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Nationality:</span>
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Nationality:</span>
                         <span class="ml-20">{{request.user.profile.nationality}}</span></li>
-                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Country:</span>
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Country:</span>
                         <span class="ml-20">{{request.user.profile.country}}</span></li>
 
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Career Objective:</span>
+                        <span class="ml-20">{{request.user.profile.career_objective}}</span></li>
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Job Preference Level:</span>
+                        <span class="ml-20 text-capitalize">{{request.user.profile.job_level}}</span></li>
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Job Preference Location:</span>
+                        <span class="ml-20">{{request.user.profile.job_preference_location}}</span></li>
+                    <li class="font-size-3 "><span style="min-width:300px;"
+                                                   class="font-weight-semibold text-capitalize text-dark">Job Preferences:</span>
+                        <span class="ml-20">{% for preference in request.user.profile.job_preferences.all %} {{preference}},&nbsp; {%endfor%}</span>
+                    </li>
+                    <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Available for:</span>
+                        <span class="ml-20">{{request.user.profile.available_for}}</span></li>
 
-                    <div id="more-data" class="moreless">
+
+                    <div id="more-data" class="moreless text-capitalize">
 
 
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Career Objective:</span>
-                            <span class="ml-20">{{request.user.profile.career_objective}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Preference Level:</span>
-                            <span class="ml-20">{{request.user.profile.job_level}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Preference Location:</span>
-                            <span class="ml-20">{{request.user.profile.job_preference_location}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Preferences:</span>
-                            <span class="ml-20">{{request.user.profile.job_preferences.all}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Job Available for:</span>
-                            <span class="ml-20">{{request.user.profile.available_for}}</span></li>
                         <li class="font-size-3 "><span style="min-width:300px;"
                                                        class="font-weight-semibold text-dark">City:</span> <span
                                 class="ml-20">{{request.user.profile.city}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Specilization in:</span>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-capitalize text-dark">Specilization in:</span>
                             <span class="ml-20">{{request.user.profile.specializations}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Skills in:</span>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-capitalize text-dark">Skills in:</span>
                             <span class="ml-20">{{request.user.profile.skills}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Gender:</span>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-capitalize text-dark">Gender:</span>
                             <span class="ml-20">{{request.user.profile.gender}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Marital Status:</span>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-capitalize text-dark">Marital Status:</span>
                             <span class="ml-20">{{request.user.profile.martial_status}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Religion:</span>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-capitalize text-dark">Religion:</span>
                             <span class="ml-20">{{request.user.profile.religion}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Contact Number:</span>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-capitalize text-dark">Contact Number:</span>
                             <span class="ml-20">{{request.user.profile.contact_number}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Disabled:</span>
-                            <span class="ml-20">{{request.user.profile.is_disabled}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Disabled:</span>
-                            <span class="ml-20">{{request.user.profile.is_disabled}}</span></li>
-                        <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Website:</span>
-                            <span class="ml-20">{{request.user.profile.website}}</span></li>
+                        <li class="font-size-3 "><span style="min-width:300px;"
+                                                       class="font-weight-semibold text-capitalize text-dark">Disabled:</span>
+                            <span class="ml-20">{% if request.user.profile.is_disabled %}Yes {%else %} No {%endif%}</span>
+                        </li>
+
+
                         <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Website:</span>
                             <span class="ml-20">{{request.user.profile.website}}</span></li>
                         <li class="font-size-3 "><span style="min-width:300px;" class="font-weight-semibold text-dark">Biograhy:</span>
                             <span class="ml-20">{{request.user.profile.bio}}</span></li>
                     </div>
-                    <li class="font-size-3"><a id="more"  class="primary-color" href="#" onclick="displayMoreLess();">More</a>...</li>
+                    <li class="font-size-3"><a id="more" class="primary-color" href="#" onclick="displayMoreLess();">More</a>...
+                    </li>
 
 
                 </ul>
@@ -121,14 +135,16 @@
 
 
     </div>
+        </div>
 
     <!-- Education Details -->
-    <div class="card ulike-card mb-5">
+    <div class="card ulike-card mb-5" id="education">
         <div class="card-header ulike-card-header font-size-4">
             <div class="d-flex">
                 <div class="font-size-4 w-100">Education Details</div>
                 <div>
-                                    <div><a href="{% url 'dashboard_jobseeker:create-education' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                    <div><a href="{% url 'dashboard_jobseeker:create-education' %}" class="btn btn-orange"><i
+                            class="fa fa-plus"></i>&nbsp;Add</a></div>
                 </div>
             </div>
         </div>
@@ -155,9 +171,11 @@
                         <td>{{education.education_board}}</td>
                         <td>{{education.name_of_institue}}</td>
                         <td>{{education.started_year}}</td>
-                        <td><a href="{% url 'dashboard_jobseeker:edit-education' education.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                        <td><a href="{% url 'dashboard_jobseeker:edit-education' education.id %}"
+                               class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
                             Edit</a></td>
-                        <td><a href="{% url 'dashboard_jobseeker:delete-education' education.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-education' education.id %}"
+                               class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -169,12 +187,13 @@
     </div>
 
     <!-- Work Experience -->
-    <div class="card ulike-card mb-5">
+    <div class="card ulike-card mb-5" id="working">
         <div class="card-header ulike-card-header font-size-4">
             <div class="d-flex">
                 <div class="font-size-4 w-100">Working Experience</div>
-                  <div>
-                                    <div><a href="{% url 'dashboard_jobseeker:create-experience' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                <div>
+                    <div><a href="{% url 'dashboard_jobseeker:create-experience' %}" class="btn btn-orange"><i
+                            class="fa fa-plus"></i>&nbsp;Add</a></div>
                 </div>
             </div>
         </div>
@@ -206,9 +225,11 @@
                         <td>{{experience.start_date}}</td>
                         <td>{{experience.start_date}}</td>
                         <td>{{experience.duties_and_responsibilities}}</td>
-                        <td><a href="{% url 'dashboard_jobseeker:edit-experience' experience.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                        <td><a href="{% url 'dashboard_jobseeker:edit-experience' experience.id %}"
+                               class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
                             Edit</a></td>
-                        <td><a href="{% url 'dashboard_jobseeker:delete-experience' experience.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-experience' experience.id %}"
+                               class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -220,12 +241,13 @@
     </div>
 
     <!-- Training Details -->
-    <div class="card ulike-card mb-5">
+    <div class="card ulike-card mb-5" id="trainings">
         <div class="card-header ulike-card-header font-size-4">
             <div class="d-flex">
                 <div class="font-size-4 w-100">Training Details</div>
-                 <div>
-                                    <div><a href="{% url 'dashboard_jobseeker:create-training' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                <div>
+                    <div><a href="{% url 'dashboard_jobseeker:create-training' %}" class="btn btn-orange"><i
+                            class="fa fa-plus"></i>&nbsp;Add</a></div>
                 </div>
             </div>
         </div>
@@ -249,9 +271,11 @@
                         <td>{{training.name_of_training}}</td>
                         <td>{{training.institution_name}}</td>
                         <td>{{training.duration}} &nbsp; {{training.duration_type}}</td>
-                        <td><a href="{% url 'dashboard_jobseeker:edit-training' training.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                        <td><a href="{% url 'dashboard_jobseeker:edit-training' training.id %}"
+                               class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
                             Edit</a></td>
-                        <td><a href="{% url 'dashboard_jobseeker:delete-training' training.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-training' training.id %}"
+                               class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -263,11 +287,12 @@
     </div>
 
     <!-- Languages -->
-    <div class="card ulike-card mb-5">
+    <div class="card ulike-card mb-5" id="languages">
         <div class="card-header ulike-card-header font-size-4">
             <div class="d-flex">
                 <div class="font-size-4 w-100">Language Details</div>
-                <div><a href="{% url 'dashboard_jobseeker:create-language' %}" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                <div><a href="{% url 'dashboard_jobseeker:create-language' %}" class="btn btn-orange"><i
+                        class="fa fa-plus"></i>&nbsp;Add</a></div>
             </div>
         </div>
         <div class="card-body">
@@ -294,9 +319,11 @@
                         <td>{{language.writing}}/5</td>
                         <td>{{language.speaking}}/5</td>
                         <td>{{language.listening}}/5</td>
-                        <td><a href="{% url 'dashboard_jobseeker:edit-language' language.id %}" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                        <td><a href="{% url 'dashboard_jobseeker:edit-language' language.id %}"
+                               class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
                             Edit</a></td>
-                        <td><a href="{% url 'dashboard_jobseeker:delete-language' language.id %}" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-language' language.id %}"
+                               class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -309,12 +336,13 @@
 
     <!-- References -->
 
-    <div class="card ulike-card mb-5">
+    <div class="card ulike-card mb-5" id="references">
         <div class="card-header ulike-card-header font-size-4">
             <div class="d-flex">
                 <div class="font-size-4 w-100">References Details</div>
-                  <div>
-                                    <div><a href="" class="btn btn-orange"><i class="fa fa-plus"></i>&nbsp;Add</a></div>
+                <div>
+                    <div><a href="{% url 'dashboard_jobseeker:create-reference' %}" class="btn btn-orange"><i
+                            class="fa fa-plus"></i>&nbsp;Add</a></div>
                 </div>
             </div>
         </div>
@@ -342,9 +370,11 @@
                         <td>{{reference.organization_name}}</td>
                         <td>{{reference.email}}</td>
                         <td>{{reference.contact_number}}</td>
-                        <td><a href="" class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
+                        <td><a href="{% url 'dashboard_jobseeker:delete-reference' reference.id %}"
+                               class="btn  text-white bg-primary-color btn-sm"><i class="fa fa-pen"></i>&nbsp;
                             Edit</a></td>
-                        <td><a href="" class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
+                        <td><a href="{% url 'dashboard_jobseeker:delete-reference' reference.id %}"
+                               class="btn text-white bg-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -356,7 +386,6 @@
     </div>
 
 
-</div>
 </div>
 
 

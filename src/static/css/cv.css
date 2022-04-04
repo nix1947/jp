@@ -1,0 +1,33 @@
+.title {
+    color: black;
+    letter-spacing:2.5px;
+    text-transform: uppercase;
+}
+
+.sub-title {
+
+    color: black;
+    text-transform:uppercase;
+    font-size:2rem;
+}
+
+.sub-sub-title {
+    color: #343434 !important;
+}
+
+.side-title {
+    text-transform:uppercase;
+    color:#B0B0B0 !important;
+}
+
+.p-cv {
+    color: #B4B4B4 !important;
+}
+
+.p-cv-dark {
+    color: #484848 !important;
+}
+.li-cv {
+    color: #B4B4B4 !important;
+}
+

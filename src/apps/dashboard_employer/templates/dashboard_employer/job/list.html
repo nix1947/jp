@@ -1,0 +1,178 @@
+{% extends 'dashboard_employer/dashboard-main.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard_content %}
+
+<div class="bg-white shadow-8 pt-7 rounded pb-8 px-11">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col" class="pl-0  border-0 font-size-4 font-weight-normal">Name</th>
+                  <th scope="col" class="border-0 font-size-4 font-weight-normal">Applied as</th>
+                  <th scope="col" class="border-0 font-size-4 font-weight-normal">Applied on</th>
+                  <th scope="col" class="border-0 font-size-4 font-weight-normal"></th>
+                  <th scope="col" class="border-0 font-size-4 font-weight-normal"></th>
+                  <th scope="col" class="border-0 font-size-4 font-weight-normal"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border border-color-2">
+                  <th scope="row" class="pl-6 border-0 py-7 pr-0">
+                    <a href="candidate-profile.html" class="media min-width-px-235 align-items-center">
+                      <div class="circle-36 mr-6">
+                        <img src="./image/table-one-profile-image-1.png" alt="" class="w-100">
+                      </div>
+                      <h4 class="font-size-4 mb-0 font-weight-semibold text-black-2">Nicolas Bradley</h4>
+                    </a>
+                  </th>
+                  <td class="table-y-middle py-7 min-width-px-235 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">Senior Project Manager</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">12 July, 2020</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <div class=""><a href="javacript:" class="font-size-3 font-weight-bold text-black-2 text-uppercase" data-toggle="modal" data-target="#employe-profile">View Application</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-110 pr-0">
+                    <div class=""><a href="contact.html" class="font-size-3 font-weight-bold text-green text-uppercase">Contact</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-100 pr-0">
+                    <div class=""><a href="" class="font-size-3 font-weight-bold text-red-2 text-uppercase">Reject</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border border-color-2">
+                  <th scope="row" class="pl-6 border-0 py-7 pr-0">
+                    <a href="candidate-profile.html" class="media min-width-px-235 align-items-center">
+                      <div class="circle-36 mr-6">
+                        <img src="./image/table-one-profile-image-2.png" alt="" class="w-100">
+                      </div>
+                      <h4 class="font-size-4 mb-0 font-weight-semibold text-black-2">Elizabeth Gomez</h4>
+                    </a>
+                  </th>
+                  <td class="table-y-middle py-7 min-width-px-235 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">Senior Project Manager</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">14 July, 2020</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <div class=""><a href="javacript:" class="font-size-3 font-weight-bold text-black-2 text-uppercase" data-toggle="modal" data-target="#employe-profile">View Application</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-110 pr-0">
+                    <div class=""><a href="contact.html" class="font-size-3 font-weight-bold text-green text-uppercase">Contact</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-100 pr-0">
+                    <div class=""><a href="" class="font-size-3 font-weight-bold text-red-2 text-uppercase">Reject</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border border-color-2">
+                  <th scope="row" class="pl-6 border-0 py-7 pr-0">
+                    <a href="candidate-profile.html" class="media min-width-px-235 align-items-center">
+                      <div class="circle-36 mr-6">
+                        <img src="./image/table-one-profile-image-3.png" alt="" class="w-100">
+                      </div>
+                      <h4 class="font-size-4 mb-0 font-weight-semibold text-black-2">Joe Wade</h4>
+                    </a>
+                  </th>
+                  <td class="table-y-middle py-7 min-width-px-235 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">Head of Marketing</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">14 July, 2020</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <div class=""><a href="javacript:" class="font-size-3 font-weight-bold text-black-2 text-uppercase" data-toggle="modal" data-target="#employe-profile">View Application</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-110 pr-0">
+                    <div class=""><a href="contact.html" class="font-size-3 font-weight-bold text-green text-uppercase">Contact</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-100 pr-0">
+                    <div class=""><a href="" class="font-size-3 font-weight-bold text-red-2 text-uppercase">Reject</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border border-color-2">
+                  <th scope="row" class="pl-6 border-0 py-7 pr-0">
+                    <a href="candidate-profile.html" class="media min-width-px-235 align-items-center">
+                      <div class="circle-36 mr-6">
+                        <img src="./image/table-one-profile-image-4.png" alt="" class="w-100">
+                      </div>
+                      <h4 class="font-size-4 mb-0 font-weight-semibold text-black-2">Roger Hawkins</h4>
+                    </a>
+                  </th>
+                  <td class="table-y-middle py-7 min-width-px-235 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">UI Designer</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">16 July, 2020</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <div class=""><a href="javacript:" class="font-size-3 font-weight-bold text-black-2 text-uppercase" data-toggle="modal" data-target="#employe-profile">View Application</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-110 pr-0">
+                    <div class=""><a href="contact.html" class="font-size-3 font-weight-bold text-green text-uppercase">Contact</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-100 pr-0">
+                    <div class=""><a href="" class="font-size-3 font-weight-bold text-red-2 text-uppercase">Reject</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border border-color-2">
+                  <th scope="row" class="pl-6 border-0 py-7 pr-0">
+                    <a href="candidate-profile.html" class="media min-width-px-235 align-items-center">
+                      <div class="circle-36 mr-6">
+                        <img src="./image/table-one-profile-image-5.png" alt="" class="w-100">
+                      </div>
+                      <h4 class="font-size-4 mb-0 font-weight-semibold text-black-2">Marie Green</h4>
+                    </a>
+                  </th>
+                  <td class="table-y-middle py-7 min-width-px-235 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">Senior Project Manager</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">21 July, 2020</h3>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <div class=""><a href="javacript:" class="font-size-3 font-weight-bold text-black-2 text-uppercase" data-toggle="modal" data-target="#employe-profile">View Application</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-110 pr-0">
+                    <div class=""><a href="contact.html" class="font-size-3 font-weight-bold text-green text-uppercase">Contact</a></div>
+                  </td>
+                  <td class="table-y-middle py-7 min-width-px-100 pr-0">
+                    <div class=""><a href="" class="font-size-3 font-weight-bold text-red-2 text-uppercase">Reject</a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pt-2">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-hover-primary rounded-0 ml-n2">
+                <li class="page-item rounded-0 flex-all-center">
+                  <a class="page-link rounded-0 border-0 px-3active" href="#" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">1</a>
+                </li>
+                <li class="page-item"><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">2</a>
+                </li>
+                <li class="page-item"><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">3</a>
+                </li>
+                <li class="page-item disabled"><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">...</a></li>
+                <li class="page-item "><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">7</a></li>
+                <li class="page-item rounded-0 flex-all-center">
+                  <a class="page-link rounded-0 border-0 px-3" href="#" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+{% endblock dashboard_content %}

@@ -1,0 +1,105 @@
+{% load static %}
+<!-- Header Area -->
+<header class="site-header site-header--menu-right bg-default position-fixed py-7 py-xs-0 site-header--absolute">
+    <div class="container-fluid-fluid px-10">
+        <nav class="navbar site-navbar offcanvas-active navbar-expand-lg  px-0 py-0">
+            <!-- Brand Logo-->
+            <div class="brand-logo">
+                <a class="font-size-6 primary-color font-weight-bold" href="/">
+                    <!-- light version logo (logo must be black)-->
+<!--                    <img src="{% static 'image/logo-main-black.png' %}" alt="" class="light-version-logo default-logo">-->
+<!--                    &lt;!&ndash; Dark version logo (logo must be White)&ndash;&gt;-->
+<!--                    <img src="{% static 'image/logo-main-white.png' %}" alt="" class="dark-version-logo">-->
+                    ULIKE PVT LTD
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="mobile-menu">
+                <div class="navbar-nav-wrapper">
+                    <ul class="navbar-nav main-menu">
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard_employer:job-all'%}">
+                                <i class="fa fa-list"></i> All Jobs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard_employer:job-draft'%}">
+                                <i class="fa fa-edit"></i> Drafted Jobs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard_employer:job-pending'%}">
+                             <i class="fa fa-list-check"></i> Pending Jobs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard_employer:job-active'  %}  ">
+                               <i class="fa fa-person-running"></i> Active Jobs
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard_employer:job-expired' %}">
+                             <i class="fa fa-book-skull"></i>   Expired Jobs
+                            </a>
+                        </li>
+
+                              <li class="nav-item">
+                           <a class="nav-link" href="#"><i class="fa fa-phone-flip"></i>  Support</a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+                <button class="d-block d-lg-none offcanvas-btn-close focus-reset" type="button" data-toggle="collapse"
+                        data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="true"
+                        aria-label="Toggle navigation">
+                    <i class="gr-cross-icon"></i>
+                </button>
+            </div>
+            <div class="header-btn-devider ml-auto ml-lg-5 pl-2 d-none d-xs-flex align-items-center">
+                <div>
+                    <a href="#" class="px-3 ml-7 font-size-7 notification-block flex-y-center position-relative">
+                        <i class="fas fa-bell heading-default-color"></i>
+                        <span
+                                class="font-size-3 count font-weight-semibold text-white bg-primary circle-24 border border-width-3 border border-white">3</span>
+                    </a>
+                </div>
+                <div>
+                    <div class="dropdown show-gr-dropdown py-5">
+                        <a class="proile media ml-7 flex-y-center" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="circle-40">
+                                <img src="{% static 'image/header-profile.png' %}" alt="">
+                            </div>
+                            <i class="fas fa-chevron-down heading-default-color ml-6"></i>
+                        </a>
+                        <div class="dropdown-menu gr-menu-dropdown dropdown-right border-0 border-width-2 py-2 w-auto bg-default"
+                             aria-labelledby="dropdownMenuLink">
+
+                            <a class="dropdown-item py-2 font-size-3 font-weight-semibold line-height-1p2 text-uppercase"
+                               href="{% url 'dashboard_employer:dashboard' %}">Edit Profile</a>
+                            <a class="dropdown-item py-2 text-red font-size-3 font-weight-semibold line-height-1p2 text-uppercase"
+                               href="{{request.user.logout}}">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Hamburger-->
+            <button class="navbar-toggler btn-close-off-canvas  hamburger-icon border-0" type="button"
+                    data-toggle="collapse" data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <!-- <i class="icon icon-simple-remove icon-close"></i> -->
+                <span class="hamburger hamburger--squeeze js-hamburger">
+                     <span class="hamburger-box">
+                         <span class="hamburger-inner"></span>
+                     </span>
+                 </span>
+            </button>
+            <!--/.Mobile Menu Hamburger Ends-->
+        </nav>
+    </div>
+</header>

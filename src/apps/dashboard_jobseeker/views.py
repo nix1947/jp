@@ -6,6 +6,7 @@ from django.shortcuts import reverse, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
 from django.forms.models import model_to_dict
 from apps.account.decorators import jobseeker_required
 from apps.account.forms import EducationForm
@@ -13,12 +14,12 @@ from apps.account.forms import (
     ReferenceForm,
     LanguageForm,
     WorkExperienceForm,
-    TrainingForm
+    TrainingForm,
+    UserProfileForm
 )
 from apps.account.models import CustomUser
 from apps.account.models import Language
 from apps.account.models import Reference, UserProfile, Education, WorkExperience, Training
-from .forms import UserProfileForm
 
 
 @login_required
@@ -115,10 +116,10 @@ class ReferenceDetailView(UpdateView):
         return super().get(self)
 
 
-class ReferenceEditView(UpdateView):
+class ReferenceUpdateView(UpdateView):
     form_class = ReferenceForm
     model = Reference
-    template_name = 'dashboard_jobseeker/reference/edit-reference.html'
+    template_name = 'dashboard_jobseeker/reference/update.html'
 
     @method_decorator(login_required, jobseeker_required)
     def dispatch(self, request, *args, **kwargs):
@@ -148,11 +149,11 @@ class ReferenceEditView(UpdateView):
 class ReferenceCreateView(CreateView):
     form_class = ReferenceForm
     model = Reference
-    template_name = 'dashboard_jobseeker/reference/add-reference.html'
+    template_name = 'dashboard_jobseeker/reference/add.html'
 
     @method_decorator(login_required, jobseeker_required)
     def dispatch(self, *args, **kwargs):
-        return super().ReferenceCreateView(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         reference = form.save(commit=False)
@@ -162,19 +163,21 @@ class ReferenceCreateView(CreateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        return render(self, self.request, 'dashboard_jobseeker/reference/add-reference.html', {
+        return render(self, self.request, 'dashboard_jobseeker/reference/add.html', {
             'form': form
         })
 
     def get_success_url(self) -> str:
         messages.add_message(request=self.request, level=messages.SUCCESS,
                              message="Reference record added Successfully")
-        return reverse("dashboard_jobseeker:profile-reference")
+        return reverse("dashboard_jobseeker:profile", kwargs={
+            'pk': self.request.user.profile.id
+        })
 
 
 class ReferenceDeleteView(DeleteView):
     model = Reference
-    template_name = 'dashboard_jobseeker/reference/delete-reference.html'
+    template_name = 'dashboard_jobseeker/reference/delete.html'
 
     @method_decorator(login_required, jobseeker_required)
     def dispatch(self, request, *args, **kwargs):
@@ -189,7 +192,7 @@ class ReferenceDeleteView(DeleteView):
 
     def get_success_url(self):
         messages.add_message(request=self.request, level=messages.SUCCESS,
-                             message=self.get_object() + " Deleted Successfully")
+                             message="Reference Deleted Successfully")
         return reverse('dashboard_jobseeker:profile', kwargs={
             'pk': self.request.user.profile.id
         })
@@ -561,6 +564,13 @@ class TrainingUpdateView(UpdateView):
             'form': form
         })
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user.id != self.request.user.profile.id:
+            raise PermissionDenied("Not authorized")
+
+        return super().get(self, request, *args, **kwargs)
+
     def get_success_url(self):
         messages.add_message(request=self.request, level=messages.SUCCESS,
                              message="Successfully updated ")
@@ -584,9 +594,72 @@ class TrainingDeleteView(DeleteView):
 
         return super().post(request, *args, **kwargs)
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user.id != self.request.user.profile.id:
+            raise PermissionDenied("Not authorized")
+
+        return super().get(self, request, *args, **kwargs)
+
     def get_success_url(self):
         messages.add_message(request=self.request, level=messages.SUCCESS,
                              message="Successfully Deleted ")
         return reverse('dashboard_jobseeker:profile', kwargs={
             'pk': self.request.user.profile.id
         })
+
+
+class ProfileEditView(UpdateView):
+    model = UserProfile
+    template_name = 'dashboard_jobseeker/edit-profile.html'
+    form_class = UserProfileForm
+
+    @method_decorator(login_required, jobseeker_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        record = form.save(commit=False)
+        if record.user.id != self.request.user.id:
+            raise PermissionDenied("Not Authorized")
+
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return render(self.request, 'dashboard_jobseeker/edit-profile.html', {
+            'form': form
+        })
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user.id != self.request.user.id:
+            raise PermissionDenied("Not authorized")
+
+        return super().get(self, request, *args, **kwargs)
+
+    def get_success_url(self):
+        messages.add_message(request=self.request, level=messages.SUCCESS,
+                             message="Profile Updated Successfully ")
+        return reverse('dashboard_jobseeker:profile', kwargs={
+            'pk': self.request.user.profile.id
+        })
+
+
+class CvDetailView(DetailView):
+    template_name = 'dashboard_jobseeker/cv/cv.html'
+    model = UserProfile
+
+    @method_decorator(login_required, jobseeker_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if self.get_object().id != self.request.user.profile.id:
+            raise PermissionDenied()
+
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        raise PermissionDenied()
+
+

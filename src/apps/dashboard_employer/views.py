@@ -1,13 +1,11 @@
 from django.contrib import messages
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        PermissionRequiredMixin)
-from django.shortcuts import (HttpResponse, get_list_or_404, redirect,
+from django.contrib.auth.mixins import (PermissionRequiredMixin)
+from django.shortcuts import (HttpResponse, redirect,
                               render)
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView, TemplateView
 
 from apps.account.decorators import employer_required
 from apps.job.forms import JobForm
@@ -26,36 +24,34 @@ def dashboard(request):
         'jobs_view': jobs_view,
         'applied_rate': applied_rate
     })
-    return HttpResponse("Employer dashboard")
 
 
 class JobCreateView(CreateView):
     model = Job
     form_class = JobForm
-    template_name = "dashboard_employer/job_create.html"
+    template_name = "dashboard_employer/job/add.html"
 
     @method_decorator(login_required)
     @method_decorator(employer_required)
-    @method_decorator(permission_required('job.add_job'))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        data = form.save(commit=False)
-        data.company = self.request.user.company
-        data.save()
-        messages.add_message(self.request, messages.SUCCESS, "Job Added successfully")
+        record = form.save(commit=False)
+        record.company = self.request.user.company
+        record.save()
+        messages.add_message(self.request, messages.SUCCESS,
+                             "Job submitted successfully and will be posted after review")
         return redirect("dashboard_employer:dashboard")
 
     def form_invalid(self, form):
-        print(form.errors)
-        return self.render_to_response(context={
+        return render(self.request, self.template_name, context={
             'form': form
         })
 
 
 class JobUpdateView(UpdateView):
-    template_name = 'dashboard_employer/job_update.html'
+    template_name = 'dashboard_employer/job/update.html'
     form_class = JobForm
     model = Job
 
@@ -69,13 +65,19 @@ class JobUpdateView(UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse("dashboard_employer:job-list")
+        return reverse("dashboard_employer:dashboard")
+
+    def form_valid(self, form):
+        record = form.save(commit=False)
+        record.save()
+        messages.add_message(self.request, level=messages.SUCCESS, message="Record updated successfully")
+        return super().form_valid(form)
 
 
 class JobListView(PermissionRequiredMixin, ListView):
     model = Job
-    template_name = 'dashboard_employer/job_list.html'
-    permission_required = ('job.view_job')
+    template_name = 'dashboard_employer/job/list.html'
+    permission_required = ('job.view_job',)
 
     @method_decorator(login_required)
     @method_decorator(employer_required)
@@ -88,7 +90,7 @@ class JobListView(PermissionRequiredMixin, ListView):
 
 class JobDeleteView(DeleteView):
     model = Job
-    template_name = 'dashboard_employer/job_delete.html'
+    template_name = 'dashboard_employer/job/add.html'
 
     @method_decorator(login_required)
     @method_decorator(employer_required)
@@ -102,3 +104,41 @@ class JobDeleteView(DeleteView):
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, self.object.title + " " + "Deleted successfully")
         return reverse("dashboard_employer:dashboard")
+
+
+class JobActiveList(TemplateView):
+    template_name = 'dashboard_employer/job/active_list.html'
+
+    @method_decorator(login_required, employer_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class JobPendingList(TemplateView):
+    template_name = 'dashboard_employer/job/active_list.html'
+
+    @method_decorator(login_required, employer_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class JobDraftList(TemplateView):
+    template_name = 'dashboard_employer/job/active_list.html'
+
+    @method_decorator(login_required, employer_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class JobExpiredList(TemplateView):
+    template_name = 'dashboard_employer/job/active_list.html'
+
+    @method_decorator(login_required, employer_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class JobTemplateView(TemplateView):
+    @method_decorator(login_required, employer_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)

@@ -1,0 +1,88 @@
+{% extends 'dashboard_employer/dashboard-main.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load static %}
+
+{% block dashboard_content %}
+
+<div class="container">
+<!-- TODO: Datatables -->
+<div class="bg-white shadow-8 pt-7 rounded pb-8 px-11">
+    <h2 class="font-size-6">All Jobs ({{request.user.company.all_jobs | length }})</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" class="pl-0  border-0 font-size-4 font-weight-normal">Title</th>
+                <th scope="col" class="border-0 font-size-4 font-weight-normal">Posted Date</th>
+                <th scope="col" class="border-0 font-size-4 font-weight-normal">Deadline</th>
+                <th scope="col" class="border-0 font-size-4 font-weight-normal">Status</th>
+                <th scope="col" class="border-0 font-size-4 font-weight-normal">Details</th>
+                <th scope="col" class="border-0 font-size-4 font-weight-normal">Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for job in request.user.company.all_jobs %}
+            <tr class="border border-color-2 text-capitalize">
+                <th scope="row" class="pl-6 border-0 py-7 pr-0">
+                    <a href="candidate-profile.html" class="media min-width-px-235 align-items-center">
+                        <h4 class="font-size-4 mb-0 font-weight-semibold text-black-2">{{job.title}}</h4>
+                    </a>
+                </th>
+                <td class="table-y-middle py-7 min-width-px-235 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">{{job.posted_date|naturalday}}</h3>
+                </td>
+                <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <h3 class="font-size-4 font-weight-normal text-black-2 mb-0">{{job.deadline|naturalday}}</h3>
+                </td>
+                <td class="table-y-middle py-7 min-width-px-170 pr-0">
+                    <div class=""><a href="" class="font-size-3 font-weight-bold text-black-2 text-uppercase"
+                                     data-toggle="modal" data-target="#employe-profile">{{job.status}}</a></div>
+                </td>
+
+                <td class="table-y-middle py-7 min-width-px-100 pr-0">
+                    <div class="mr-3"><a  href="{{job.get_absolute_url}}" class="font-size-3 btn btn-orange text-white font-weight-bold text-uppercase">View</a>
+                    </div>
+                </td>
+                 <td class="table-y-middle py-7 min-width-px-100 pr-0">
+                    <div class="mr-3"><a  href="{% url 'dashboard_employer:job-edit' 1 %}" class="font-size-3 btn bg-primary-color text-white font-weight-bold text-uppercase">Edit</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="pt-2">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-hover-primary rounded-0 ml-n2">
+                <li class="page-item rounded-0 flex-all-center">
+                    <a class="page-link rounded-0 border-0 px-3active" href="#" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">1</a>
+                </li>
+                <li class="page-item"><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">2</a>
+                </li>
+                <li class="page-item"><a class="page-link border-0 font-size-4 font-weight-semibold px-3" href="#">3</a>
+                </li>
+                <li class="page-item disabled"><a class="page-link border-0 font-size-4 font-weight-semibold px-3"
+                                                  href="#">...</a></li>
+                <li class="page-item "><a class="page-link border-0 font-size-4 font-weight-semibold px-3"
+                                          href="#">7</a></li>
+                <li class="page-item rounded-0 flex-all-center">
+                    <a class="page-link rounded-0 border-0 px-3" href="#" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</div>
+
+
+
+
+
+{%endblock dashboard_content %}

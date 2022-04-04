@@ -1,21 +1,17 @@
-from datetime import datetime
-
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.core.validators import MaxLengthValidator, MaxValueValidator, MinLengthValidator, MinValueValidator
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from apps.job.models import Job
 from apps.job.models import Location
 from apps.job.models import Skill, Category, Industry
 from . import usertype
-
-from ..abstract_model import AbstractBaseModel
 from .managers import CustomUserManager
-
-from apps.job.models import Job
+from ..abstract_model import AbstractBaseModel
+from django.urls import reverse
+from django.db.models import F
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin, AbstractBaseModel):
@@ -39,6 +35,31 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, AbstractBaseModel):
 
     def __str__(self):
         return self.email
+
+    def dashboard(self):
+        if self.user_type == usertype.EMPLOYER:
+            return reverse('dashboard_employer:dashboard')
+        elif self.user_type == usertype.JOBSEEKER:
+            return reverse('dashboard_jobseeker:dashboard')
+
+    def logout(self):
+        return reverse('account:logout')
+
+    def change_password(self):
+        # TODO:
+        if self.user_type == usertype.EMPLOYER:
+            return ''
+        elif self.user_type == usertype.JOBSEEKER:
+            return ''
+
+    def profile(self):
+        # TODO:
+        if self.user_type == usertype.EMPLOYER:
+            return ''
+        elif self.user_type == usertype.JOBSEEKER:
+            return reverse('dashboard_jobseeker:profile', kwargs={
+                'pk': self.pk
+            })
 
 
 class Company(AbstractBaseModel):
@@ -72,6 +93,30 @@ class Company(AbstractBaseModel):
     def get_absolute_url(self):
         return '/company'
 
+    def posted_jobs(self):
+        self.job_set.objects.filter(is_draft=False)
+
+    def drafted_jobs(self):
+        return self.job_set.filter(is_draft=True)
+
+
+    def expired_jobs(self):
+        return [job for job in self.job_set.filter() if
+                job.is_expired == True]
+
+    def all_jobs(self):
+        return self.job_set.all()
+
+    def pending_jobs(self):
+        return self.job_set.filter(is_approved=False, is_draft=False)
+
+    def active_jobs(self):
+
+        return [job for job in self.job_set.filter(is_active=True, is_draft=False) if
+                    job.is_expired == False]
+
+
+
 
 class UserProfile(AbstractBaseModel):
     # Basic info
@@ -81,6 +126,8 @@ class UserProfile(AbstractBaseModel):
     photo = models.ImageField(verbose_name=_("Profile Picture"),
                               upload_to="uploads/user/profile",
                               blank=True, null=True)
+
+    dob = models.DateField()
 
     current_address = models.CharField(max_length=255, null=True)
     permanent_address = models.CharField(max_length=255, null=True)
@@ -288,7 +335,7 @@ class Language(AbstractBaseModel):
 
     user = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, related_name="languages")
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.language
 
 
@@ -300,3 +347,6 @@ class Reference(AbstractBaseModel):
     contact_number = models.CharField(max_length=10)
 
     user = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, related_name="references")
+
+    def __str__(self):
+        return self.reference_name
