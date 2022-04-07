@@ -1,0 +1,134 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+<div class="bg-default-1  p-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+
+                <div class="border p-5 bg-white">
+                    <p class="mb-0 font-size-3 heading-default-color">Showing {{object.get_jobs.count}} jobs  for  <span class="text-capitalize text-orange">{{object.title}} </span>
+
+                       </p>
+                </div>
+
+                {% if object.get_jobs.count == 0 %}
+                <h2 class="font-size-5 mt-10 text-gray">No Jobs found for {{object.title}}</h2>
+                {% endif %}
+                {% for object in object.get_jobs %}
+                <div class="mb-8 mt-5">
+                    <!-- Single Featured Job -->
+                    <div class="pt-9 px-xl-9 px-lg-7 px-7 pb-7 light-mode-texts bg-white rounded hover-shadow-3 ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="media align-items-center">
+                                    <div class="square-72 d-block mr-8">
+                                        <img src="{% static 'image/l2/png/featured-job-logo-1.png' %}" alt="">
+                                    </div>
+                                    <div>
+                                        <h3 class="mb-0"><a class="font-size-6 heading-default-color" href="#">
+                                            {{object.title}}</a></h3>
+                                        <a href="{{object.company.get_absolute_url}}" class="font-size-3 text-default-color line-height-2">{{object.company}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-right pt-7 pt-md-5">
+                                <div class="media justify-content-md-end">
+
+                                    <a class="btn btn-orange text-uppercase btn-medium rounded-3" href="{{object.get_absolute_url}}">View
+                                        Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-8">
+                            <div class="col-md-6">
+                                <ul class="d-flex list-unstyled mr-n3 flex-wrap">
+                                    {% for skill in object.skills.all %}
+                                    <li>
+                                        <a class="bg-regent-opacity-15 min-width-px-96 mr-3 text-center rounded-3 px-6 py-1 font-size-3 text-black-2 mt-2"
+                                           href="#">{{skill.skill}}</a>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="d-flex list-unstyled mr-n3 flex-wrap mr-n8 justify-content-md-end">
+                                    <li class="mt-2 mr-8 font-size-small text-black-2 d-flex">
+                                        <span class="mr-4" style="margin-top: -2px"><img
+                                                src="{% static 'image/svg/icon-loaction-pin-black.svg' %}"
+                                                alt=""></span>
+
+
+                                        <span class="font-weight-semibold"><a class="text-dark text-capitalize" href="{{location.get_absolute_url}}">{{ object.job_location.first}}&nbsp;</a></span>
+
+                                    </li>
+                                    <li class="mt-2 mr-8 font-size-small text-black-2 d-flex">
+                                        <span class="mr-4" style="margin-top: -2px"><img
+                                                src="{% static 'image/svg/icon-suitecase.svg' %}" alt=""></span>
+                                        <span class="font-weight-semibold text-capitalize">{{object.employment_type}}</span>
+                                    </li>
+                                    <li class="mt-2 mr-8 font-size-small text-black-2 d-flex">
+                                        <span class="mr-4" style="margin-top: -2px"><img
+                                                src="{% static 'image/svg/icon-clock.svg' %}" alt=""></span>
+                                        <span class="font-weight-semibold">{{object.posted_date | naturaltime}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-md-7">
+                                <p class=" text-orange font-size-3 rounded-3">Posted on: 12 April 2020</p>
+                            </div>
+                            <div class="col-md-5">
+                                <ul class="d-flex list-unstyled mr-n3 flex-wrap mr-n8 justify-content-md-end">
+
+                                    <li class="mt-2 mr-8 font-size-small text-black-2 d-flex">
+
+                                        <span class="font-weight-semibold mr-5"><i class="fa fa-eye"></i>&nbsp;Views: {{object.get_views}}</span>
+                                        <span class="font-weight-semibold"><img src="{% static 'image/share.png' %}"
+                                                                                alt=""> share</span>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+
+            <!-- side bar -->
+            <div class="col-md-3 col-sm-12">
+                {% include 'partials/_sidebar.html' %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+<script>
+    $(document).ready(function () {
+        $('label').removeClass('d-block text-black-2 font-size-4 font-weight-semibold mb-4');
+        $('select').removeClass('form-control')
+    });
+
+
+
+
+
+
+
+
+
+</script>

@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import home, search
+from .views import home, search, company_detail
 
 
 urlpatterns = [
@@ -26,6 +26,11 @@ urlpatterns = [
     path('', home, name="homepage"),
     path('job/', include('apps.job.urls'), name="job"),
     path('search/', search, name="job"),
+
+
+    # Company Url
+    path('company/<str:name>', company_detail, name="company"),
+
     path('account/', include('apps.account.urls')),
     path('dashboard/js/', include('apps.dashboard_jobseeker.urls')),
     path('dashboard/employer/', include('apps.dashboard_employer.urls')),
@@ -39,4 +44,3 @@ if settings.DEBUG:
     # Serve media in development mode
     urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    pass

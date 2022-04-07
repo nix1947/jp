@@ -18,10 +18,10 @@
                     <!-- cta-btns start -->
                     <div
                             class="btns d-flex justify-content-xl-end justify-content-center align-items-xl-center flex-wrap h-100  mx-n4">
-                        <a class="btn  btn-medium btn-outline-gallery  mx-4 mt-6 text-uppercase" href="#" data-toggle="modal"
-                           data-target="#login">Log in</a>
-                        <a class="btn btn-orange btn-medium btn-h-60 mx-4 mt-6 text-uppercase" href="#" data-toggle="modal"
-                           data-target="#signup">Register</a>
+                        <a class="btn  btn-medium btn-outline-gallery  mx-4 mt-6 text-uppercase" href="{% url 'account:jobseeker-login' %}"
+                           data-target="{% url 'account:jobseeker-login' %}">Log in</a>
+                        <a class="btn btn-orange btn-medium btn-h-60 mx-4 mt-6 text-uppercase" href="{% url 'account:jobseeker-registration' %}"
+                           data-target="{% url 'account:jobseeker-registration' %}">Register</a>
                     </div>
                     <!-- cta-btns end -->
                 </div>
@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-lg-4 col-sm-6 mb-lg-0 mb-9">
                 <!-- footer logo start -->
-                <img src="{% static 'image/logo-main-white.png' %}" alt="" class="footer-logo">
+                <a class="text-white font-size-10 font-weight-semibold" href="/">ULIKE</a>
                 <p class=" mt-3 text-capitalize text-justify font-size-3 heading-default-color">
                     Ulike  is the fastest-growing job portal in Nepal. Find your career opportunities here. Search
                     among thousands of jobs from top companies, industries, and locations of your choice.

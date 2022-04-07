@@ -1,10 +1,13 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
+from datetime import datetime
+import pytz
 from django.db import models
+from apps.job.models import Job
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-
-from apps.job.models import Job
+from django.shortcuts import HttpResponseRedirect, HttpResponse
+from django.core.exceptions import PermissionDenied
 from apps.job.models import Location
 from apps.job.models import Skill, Category, Industry
 from . import usertype
@@ -12,6 +15,7 @@ from .managers import CustomUserManager
 from ..abstract_model import AbstractBaseModel
 from django.urls import reverse
 from django.db.models import F
+from django.utils.text import slugify
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin, AbstractBaseModel):
@@ -42,6 +46,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, AbstractBaseModel):
         elif self.user_type == usertype.JOBSEEKER:
             return reverse('dashboard_jobseeker:dashboard')
 
+        else:
+            return '/admin_'
+
     def logout(self):
         return reverse('account:logout')
 
@@ -61,6 +68,22 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, AbstractBaseModel):
                 'pk': self.pk
             })
 
+    def is_job_seeker(self):
+        if self.user_type == usertype.JOBSEEKER:
+            return True
+
+        return False
+
+
+    def is_employer(self):
+        if self.user_type == usertype.EMPLOYER:
+            return True
+
+        return False
+
+    class Meta:
+        verbose_name_plural = 'Users'
+
 
 class Company(AbstractBaseModel):
     user = models.OneToOneField(CustomUser, related_name='company', on_delete=models.CASCADE, null=True)
@@ -75,6 +98,8 @@ class Company(AbstractBaseModel):
     website = models.URLField(default='', null=True, blank=True)
     headquarter = models.ForeignKey(Location, null=True, blank=True, on_delete=models.SET_NULL,
                                     verbose_name=_("Location"))
+
+    phone = models.PositiveIntegerField(max_length=10, null=True)
     linkedin = models.URLField(default="#", null=True)
     facebook = models.URLField(default="#", null=True)
     twitter = models.URLField(default="#", null=True)
@@ -85,20 +110,27 @@ class Company(AbstractBaseModel):
     def __str__(self):
         return self.organization_name
 
+    class Meta:
+        verbose_name_plural = 'Companies'
+
     @property
     def get_user(self):
         """Proxy for profile"""
         return self.profile
 
+    def get_views(self):
+        return (datetime.utcnow().replace(tzinfo=pytz.UTC) - self.created_date).days + 1
+
     def get_absolute_url(self):
-        return '/company'
+        return reverse('company', kwargs={
+            'name': slugify(self.organization_name + '-' + str(self.pk))
+        })
 
     def posted_jobs(self):
         self.job_set.objects.filter(is_draft=False)
 
     def drafted_jobs(self):
         return self.job_set.filter(is_draft=True)
-
 
     def expired_jobs(self):
         return [job for job in self.job_set.filter() if
@@ -111,11 +143,22 @@ class Company(AbstractBaseModel):
         return self.job_set.filter(is_approved=False, is_draft=False)
 
     def active_jobs(self):
+        return [job for job in
+                self.job_set.filter(is_active=True, is_approved=True, is_draft=False)
+                if
+                job.is_expired == False]
 
-        return [job for job in self.job_set.filter(is_active=True, is_draft=False) if
-                    job.is_expired == False]
+    def total_openings(self):
+        return len([job for job in
+                    self.job_set.filter(is_active=True, is_approved=True, is_draft=False).distinct('id').order_by('id',
+                                                                                                                  '-updated_date')
+                    if
+                    job.is_expired == False])
 
-
+    def get_similar_companies(self):
+        return self._meta.model.objects.filter(
+            industry=self.industry
+        ).distinct()[:7]
 
 
 class UserProfile(AbstractBaseModel):

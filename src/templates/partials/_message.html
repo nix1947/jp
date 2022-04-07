@@ -2,7 +2,7 @@
 <div class="bg-primary-color p-5 mb-3 text-white" >
     {% for message in messages %}
     <li
-            {% if message.tags %} class="text-white{{ message.tags }}" {% endif %}>{{ message }}
+            {% if message.tags %} class="text{{ message.tags }}" {% endif %}>{{ message }}
     </li>
     {% endfor %}
 </div>

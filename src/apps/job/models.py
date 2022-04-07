@@ -1,14 +1,11 @@
-import random
-from datetime import datetime, timedelta
-from django.db.models import Q
+from datetime import datetime
 
-from django.apps import apps
-from django.db import models
 import pytz
+from django.db import models
+from django.db.models import Q
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-
 from ..abstract_model import AbstractBaseModel
 
 
@@ -18,12 +15,27 @@ class Category(AbstractBaseModel):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    def get_jobs(self):
+        return self.job_categories.filter(is_draft=False, is_approved=True)
+
+    def get_absolute_url(self):
+        return reverse('job:job-by-category', kwargs={
+            'title': slugify(self.title + '-' + str(self.pk))
+
+        })
+
 
 class Location(AbstractBaseModel):
     location = models.CharField(max_length=255, verbose_name=_("Location"))
 
     def __str__(self):
         return self.location
+
+    class Meta:
+        verbose_name_plural = 'Locations'
 
 
 class Skill(AbstractBaseModel):
@@ -40,16 +52,31 @@ class Skill(AbstractBaseModel):
     def __str__(self):
         return self.skill
 
+    class Meta:
+        verbose_name_plural = 'Skills'
+
 
 class Industry(AbstractBaseModel):
     title = models.CharField(max_length=255, verbose_name="Industry title")
 
+    class Meta:
+        verbose_name_plural = 'Industries'
+
     def __str__(self):
         return self.title
 
+    def get_jobs(self):
+        return self.jobs.filter(is_draft=False, is_approved=True)
+
+    def get_absolute_url(self):
+        return reverse('job:job-by-industry', kwargs={
+            'title': slugify(self.title + '-' + str(self.pk))
+
+        })
+
 
 class Job(AbstractBaseModel):
-    company = models.ForeignKey('account.Company', on_delete=models.SET_NULL, null=True, verbose_name='Draft')
+    company = models.ForeignKey('account.Company', on_delete=models.SET_NULL, null=True, verbose_name='Company')
     title = models.CharField(max_length=255, verbose_name=_('Job title'), help_text=_("IT manager"))
     description = models.TextField(verbose_name=_('Job description'))
     posted_date = models.DateTimeField(auto_now_add=True, verbose_name=_("Posted Date"))
@@ -158,3 +185,36 @@ class Job(AbstractBaseModel):
             Q(job_category=self.job_category) |
             Q(job_industry=self.job_industry)
         ).distinct()[:7]
+
+
+
+class JobAppliedByUser(AbstractBaseModel):
+
+    user = models.ForeignKey('account.UserProfile', related_name='applied_jobs', on_delete=models.SET_NULL, null=True)
+    job = models.ForeignKey(Job, related_name='applied_jobs', on_delete=models.SET_NULL, null=True)
+    status = models.CharField(
+        max_length=255,
+        default='pending',
+        choices=(
+            ('pending', 'Pending'),
+            ('rejected', 'Rejected'),
+            ('accepted', 'Accepted'),
+        )
+    )
+
+    class Meta:
+        unique_together = ('user', 'job',)
+
+    def __str__(self):
+        return str(self.job.title) + 'applied by' + str(self.user.full_name)
+
+
+class JobBookMarked(AbstractBaseModel):
+    user = models.ForeignKey('account.UserProfile', related_name='bookmarked_jobs', on_delete=models.SET_NULL, null=True)
+    job = models.ForeignKey(Job, related_name='bookmarked_jobs', on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        unique_together = ('user', 'job',)
+
+    def __str__(self):
+        return str(self.job.title) + 'applied by' + str(self.user.full_name)

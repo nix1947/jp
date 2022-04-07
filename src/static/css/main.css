@@ -8916,3 +8916,8 @@ color:#FFF !important;
 .moreless {
 display:none;
 }
+
+.text-error {
+color: red !important;
+
+}

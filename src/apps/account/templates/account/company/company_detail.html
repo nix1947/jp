@@ -1,0 +1,150 @@
+{% extends 'index.html' %}
+{%load static %}
+{% load humanize %}
+
+
+{% block content %}
+<div class="container">
+
+    <div class="row mt-5">
+
+        <div class="col-md-8 col-sm-12">
+
+
+            <!-- jobDetails-section -->
+            <div class="card p-5 mt-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+                <div class="d-flex">
+                    <div class="border p-1">
+
+                        <img height="130" width="130"
+                             src="{{MEDIA_URL}}{{object.logo}}"/>
+                    </div>
+
+                    <div class="ml-10 flex-grow-1 ">
+                        <h2 class="font-size-4" style="margin:0px;">
+                            {{object.organization_name}}
+                        </h2>
+                        <h2 class="font-size-3 text-truncate font-weight-bold" style="margin:0px; color:#067080;">
+                            <a class=" primary-color primary-color-hover text-capitalize"
+                               href="{{object.industry.get_absolute_url}}">{{object.industry}}</a>
+                        </h2>
+                        <h2 class="font-size-3 text-truncate text-capitalize text-gray "
+                            style="margin:0px; color:#067080;">
+                            Head office: {{object.headquarter}}
+                        </h2>
+
+                        <h2 class="font-size-3 text-gray text-truncate text-capitalize"
+                            style="margin:0px; color:#067080;">
+                            Views: {{object.get_views}}
+                        </h2>
+
+
+                    </div>
+
+                    <div class="">
+                        <p class="d-block font-size-3" style="margin:0px;">
+                            &nbsp; <i class="fa fa-phone"></i>
+                            {%if object.phone %} {{object.phone}} {%else %} Not available{%endif%}
+                        </p>
+                        <p class="text-capitalize font-size-3 primary-color d-block" style="margin:0px;"><i
+                                class="fa fa-globe"></i> &nbsp; <a class="primary-color" href="{{object.website}}">Visit
+                            official site</a></p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Job specification -->
+            <div class="card p-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
+
+
+                <div class="row">
+                    <h2 class="font-size-5 p-5 d-block text-gray underline">About us</h2>
+                    <div class="col-12 font-size-3">
+                        {{object.description}}
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- similar companies -->
+            <div class="card mb-3 ulike-card">
+                <div class="card-header font-weight-semibold  ulike-card-header text-capitalize">
+                    <i class="fa fa-building text-white"></i> &nbsp;Similar Companies
+                </div>
+
+                {% for company in object.get_similar_companies %}
+
+                <div class="card-body p-4 ulike-card-body m-2 border">
+                    <div class="d-flex">
+                        <div class="border p-1" style="height:70px; width:70px">
+
+
+                            <img src="{{MEDIA_URL}}{{company.logo}}" alt="{{company.organization_name}}" width="50"
+                                 height="50">
+                        </div>
+                        <div class="ml-10 w-100">
+
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <p class="font-size-4 mb-1 primary-color">{{company.organization_name}}</p>
+                                    <p class="font-size-2 font-weight-bold mb-2">Total Openings:
+                                        {{company.total_openings}}</p>
+
+                                </div>
+
+                                <div class="flex-shrink-1">
+                                    <a class="btn btn-orange font-size-2" href="{{company.get_absolute_url}}">View Company Profiles</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </div>
+        <!-- sidebar job detail -->
+        <div class="col-md-4 mt-5 col-sm-12">
+            <div class="card mb-3 ulike-card">
+                <div class="card-header font-weight-semibold  ulike-card-header text-capitalize">
+                    <i class="fa fa-briefcase text-white"></i> &nbsp; Current Openings
+                </div>
+                {% for job in object.active_jobs|slice:":5"%}
+                <a href="{{job.get_absolute_url}}">
+                    <div class="card-body p-4 ulike-card-body m-2 border">
+                        <div class="d-flex">
+                            <div class="border p-1" style="height:70px; width:70px">
+
+
+                                <img src="{{MEDIA_URL}}{{object.logo}}"
+                                     alt="" width="50" height="50">
+                            </div>
+                            <div class="ml-10">
+                                <h2 class="font-size-3 text-truncate font-weight-bold" style="margin:0px; ">
+                                    {{job.title}}</h2>
+                                <p class="font-size-2 font-weight-bold mb-2">{{job.company}}</p>
+                                <p class="font-size-2 mb-2 text-truncate">{{job.deadline}}</p>
+                                <p class="font-size-2 text-truncate"><i class="fa fa-eye"></i> Views: {{job.get_views}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

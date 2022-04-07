@@ -85,6 +85,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.job.context_processor.sidebar_jobs',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -146,11 +148,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
+    'static',
     BASE_DIR / "static",
   
 ]
 
-STATIC_ROOT = os.getenv('STATIC_ROOT') 
+STATIC_ROOT = "C:\\Users\\user\\AppData\\Local\\Temp"
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
 

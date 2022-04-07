@@ -10,13 +10,13 @@
 
         <div class="col-md-8 col-sm-12">
 
-
+            {% include 'partials/_message.html' %}
             <!-- jobDetails-section -->
             <div class="card p-5 mt-5 mb-10" style="background:#EAF6F7; border-radius:0px;">
                 <div class="d-flex">
                     <div class="border p-1">
-                        <img height="100px" width="100px"
-                             src="https://api.v1.jobejee.com/v2/resource/employer-logo/7170e61c1647603505897.jpg"/>
+                        <img height="130" width="130"
+                             src="{{MEDIA_URL}}{{object.company.logo}}"/>
                     </div>
 
                     <div class="ml-10 flex-grow-1 ">
@@ -40,13 +40,23 @@
                     </div>
 
                     <div class="">
-                        <!-- TODO: Apply now -->
-<!--                        <p class="font-size-4"><a class="btn btn-sm " style="background: #00737E; color:#FFF;" href="">-->
-<!--                            <i class="fa fa-paper-plane"></i>&nbsp; Apply Now</a></p>-->
+                        {% if not request.user.is_employer  %}
+                        <p class="font-size-4">
+                            <form method="POST" action="{% url 'job:job-apply' %}">
+                        {%csrf_token%}
+                            <input type="hidden" name="job_id" value="{{object.id}}">
+                            <input type="hidden" name="absolute_path" value="{{request.get_full_path}}">
+                            <input  {% if object.is_expired %} disabled {%endif%} type="submit"  class="btn btn-sm" value="Apply" style="background: #00737E; color:#FFF;">
+
+                           </form>
+                        </p>
+                        {%endif%}
                         <p class="d-block font-size-3" style="margin:0px;"><i class="fa fa-share"></i> &nbsp; Share this
                             job </p>
                         <p class="text-capitalize font-size-3 primary-color d-block" style="margin:0px;"><i
-                                class="fa fa-globe"></i> &nbsp; <a class="primary-color" href="{{object.company.website}}">Visit official site</a></p>
+                                class="fa fa-globe"></i> &nbsp; <a class="primary-color"
+                                                                   href="{{object.company.website}}">Visit official
+                            site</a></p>
                     </div>
 
                 </div>
@@ -145,7 +155,8 @@
                             </span>
 
                                 </div>
-                                <div class="font-size-3 text-capitalize" style="margin:0px;">{{object.posted_date | naturalday}}
+                                <div class="font-size-3 text-capitalize" style="margin:0px;">{{object.posted_date |
+                                    naturalday}}
                                 </div>
                             </div>
                         </div>
@@ -249,8 +260,8 @@
                 <div class="row">
                     <h2 class="font-size-5 p-5 d-block text-gray underline">Instruction to Apply</h2>
                     <div class="col-12 font-size-3 pl-5  text-start">
-<!--                        <p class="font-size-3 mb-0 font-weight-bold p-0 text-gray">Apply Via Ulike Jobs</p>-->
-<!--                        <p class="primary-color mb-0 p-0 font-size-3 text-capitalize">OR</p>-->
+                        <!--                        <p class="font-size-3 mb-0 font-weight-bold p-0 text-gray">Apply Via Ulike Jobs</p>-->
+                        <!--                        <p class="primary-color mb-0 p-0 font-size-3 text-capitalize">OR</p>-->
                         <p class="font-size-3 text-capitalize mb-0 text-gray fst-italic"> {{object.apply_method}}</p>
                     </div>
                 </div>
@@ -269,7 +280,8 @@
                     <div class="card-body p-4 ulike-card-body m-2 border">
                         <div class="d-flex">
                             <div class="border p-1" style="height:70px; width:70px">
-                                <img src="https://merojob.com/media/cache/f3/bd/f3bd711bacf511a15808560ab68becb2.jpg"
+                                <img width="50" height="50"
+                                     src="{{MEDIA_URL}}{{job.company.logo}}"
                                      alt="">
                             </div>
                             <div class="ml-10">
@@ -288,5 +300,7 @@
         </div>
     </div>
 </div>
+
+
 
 {% endblock content %}

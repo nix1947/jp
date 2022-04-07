@@ -74,7 +74,7 @@
                                             <div class="ml-3" style="overflow-y:hidden">
                                                 <h2 class="font-size-4 text-truncate font-weight-bold"
                                                     style="margin:0px; color:#067080;">
-                                                    <a class="primary-color primary-color-hover" href="">{{company}}</a>
+                                                    <a class="primary-color primary-color-hover" href="{{company.get_absolute_url}}">{{company}}</a>
                                                 </h2>
                                                 <ul class="pl-6 d-block">
                                                     {% for job in company.job_set.all %}

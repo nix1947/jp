@@ -19,7 +19,7 @@ def jobseeker_login(request):
     login_form = JobSeekerLoginForm()
 
     if request.method == 'GET':
-        login_from = JobSeekerLoginForm()
+        login_from = login_form
 
     elif request.method == 'POST':
         login_form = JobSeekerLoginForm(request.POST)
