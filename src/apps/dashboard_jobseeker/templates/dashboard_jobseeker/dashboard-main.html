@@ -52,7 +52,7 @@
                     <p class="font-size-3 mb-0 p-0"><span class="font-weight-semibold">Email:</span>
                         {{request.user.email}}</p>
                     <p class="font-size-3 mb-0 p-0"><span class="font-weight-semibold">Contact:</span>
-                        {{request.user.profile.contact_numbercontact_number}}</p>
+                        {{request.user.profile.contact_number}}</p>
 
                 </div>
 
@@ -74,17 +74,19 @@
 
             <!-- Cards -->
             <div class="d-flex flex-wrap  ">
-                <a href="#" class="border d-block flex-fill p-10  mt-10 mb-10 mr-10">
+                <a href="{% url 'dashboard_jobseeker:recommended-job' %} " class=" d-block flex-fill p-10  mt-10 mb-10 mr-10">
                     <h2 class="font-size-6 text-center primary-color">Recommended Jobs</h2>
                     <h2 class="text-center primary-color font-size-10">{{request.user.profile.get_recommended_jobs.count }}</h2>
                 </a>
-                <a href="#" class="border d-block flex-fill p-10  mt-10 mb-10 mr-10">
+                <a href="{% url 'dashboard_jobseeker:applied-job' %}" class="border d-block flex-fill p-10  mt-10 mb-10 mr-10">
                     <h2 class="font-size-6 text-center primary-color">Jobs Applied</h2>
-                    <h2 class="text-center font-size-10 primary-color">{{request.user.profile.get_jobs_applied}}</h2>
+                    <h2 class="text-center font-size-10 primary-color">
+                        {{request.user.profile.get_applied_jobs.count }}
+                    </h2>
                 </a>
-                <a href="#" class="border  d-block flex-fill p-10 mt-10 mb-10 mr-10 ">
-                    <h2 class="font-size-6 text-center primary-color">Saved Jobs</h2>
-                    <h2 class="text-center font-size-10 primary-color">{{request.user.profile.get_saved_jobs}}</h2>
+                <a href="{% url 'dashboard_jobseeker:bookmarked-job' %}" class="border  d-block flex-fill p-10 mt-10 mb-10 mr-10 ">
+                    <h2 class="font-size-6 text-center primary-color">BookMarked Jobs</h2>
+                    <h2 class="text-center font-size-10 primary-color">{{request.user.profile.get_bookmarked_jobs.count}}</h2>
                 </a>
             </div>
         </div>

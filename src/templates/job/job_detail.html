@@ -53,6 +53,27 @@
                         {%endif%}
                         <p class="d-block font-size-3" style="margin:0px;"><i class="fa fa-share"></i> &nbsp; Share this
                             job </p>
+
+
+
+                         {% if not request.user.is_employer  %}
+
+                            <form method="POST" name="saveJob" action="{% url 'job:job-bookmark' %}">
+                                {%csrf_token%}
+                            <input type="hidden" name="job_id" value="{{object.id}}">
+                            <input type="hidden" name="absolute_path" value="{{request.get_full_path}}">
+                            <a class="font-size-3 primary-color"
+                               onclick='document.forms["saveJob"].submit(); return false;'
+                               {% if object.is_expired %} disabled {%endif%} type="submit"  >
+                                <i class="fa fa-bookmark primary-color"></i>&nbsp;
+
+                                    Save job
+                            </a>
+                            </form>
+
+                        {%endif%}
+
+
                         <p class="text-capitalize font-size-3 primary-color d-block" style="margin:0px;"><i
                                 class="fa fa-globe"></i> &nbsp; <a class="primary-color"
                                                                    href="{{object.company.website}}">Visit official

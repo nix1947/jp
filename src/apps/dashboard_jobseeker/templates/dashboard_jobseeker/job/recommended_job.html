@@ -1,0 +1,62 @@
+{% extends 'dashboard_jobseeker/edit-profile.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block edit_profile_content %}
+<div class="container">
+    <div class="card ulike-card mb-5">
+        <div class="card-header ulike-card-header font-size-4">
+            <div class="d-flex">
+                <div class="font-size-4 text-capitalize w-100">Recommended Jobs</div>
+
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table font-size-3 text-capitalize">
+                    <thead>
+                    <tr>
+                        <th scope="col">Job title</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Job Level</th>
+                        <th scope="col">Industry</th>
+                        <th scope="col">Apply</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for job in request.user.profile.get_recommended_jobs %}
+                    <tr>
+                        <td><a class="primary-color font-weight-semibold" href="{{applied.job.get_absolute_url}}">{{job.title}}</a>
+                        </td>
+                        <td><a class="text-underline text-gray" href="{{applied.job.company.get_absolute_url}}">{{job.company}}</a>
+                        </td>
+                        <td>{{job.job_level}}</td>
+                        <td>{{job.job_industry}}</td>
+                        <td>
+                            <form method="post" action="{% url 'job:job-apply'%}">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="job_id" value="{{job.id}}">
+                                <input type="hidden" name="absolute_path" value="{{request.get_full_path}}">
+                                <input type="submit" value="Apply" class="btn btn-primary text-white"/>
+                            </form>
+                        </td>
+
+
+                    </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock edit_profile_content %}

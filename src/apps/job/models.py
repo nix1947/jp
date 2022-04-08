@@ -168,6 +168,18 @@ class Job(AbstractBaseModel):
     def get_views(self):
         return (datetime.utcnow().replace(tzinfo=pytz.UTC) - self.posted_date).days + 5
 
+    def is_job_bookmarked(self, user):
+        user = JobBookMarked.objects.get(job__id=self.pk, user__id=self.user.profile__id).count()
+        if user:
+            return True
+        return False
+
+    def is_job_applied(self, user):
+        user = JobAppliedByUser.objects.get(job__id=self.pk, user__id=self.user.profile__id).count()
+        if user:
+            return True
+        return False
+
     def status(self):
         if self.is_expired:
             return 'Expired'
@@ -187,9 +199,7 @@ class Job(AbstractBaseModel):
         ).distinct()[:7]
 
 
-
 class JobAppliedByUser(AbstractBaseModel):
-
     user = models.ForeignKey('account.UserProfile', related_name='applied_jobs', on_delete=models.SET_NULL, null=True)
     job = models.ForeignKey(Job, related_name='applied_jobs', on_delete=models.SET_NULL, null=True)
     status = models.CharField(
@@ -206,11 +216,12 @@ class JobAppliedByUser(AbstractBaseModel):
         unique_together = ('user', 'job',)
 
     def __str__(self):
-        return str(self.job.title) + 'applied by' + str(self.user.full_name)
+        return str(self.job.title) + 'applied by ' + str(self.user.full_name)
 
 
 class JobBookMarked(AbstractBaseModel):
-    user = models.ForeignKey('account.UserProfile', related_name='bookmarked_jobs', on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey('account.UserProfile', related_name='bookmarked_jobs', on_delete=models.SET_NULL,
+                             null=True)
     job = models.ForeignKey(Job, related_name='bookmarked_jobs', on_delete=models.SET_NULL, null=True)
 
     class Meta:

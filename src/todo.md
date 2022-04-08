@@ -39,4 +39,6 @@ Use lazy loading of classes with quotation.
 # Get currently rending page full path in template
 ```python
 {{request.get_full_path}}
+
+
 ```

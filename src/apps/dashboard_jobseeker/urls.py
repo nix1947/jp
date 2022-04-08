@@ -36,6 +36,12 @@ from .views import (
     TrainingUpdateView,
     TrainingListView,
     TrainingDeleteView,
+
+    # JobLists.
+    AppliedJobView,
+    BookMarkedJobView,
+    ScheduledInterviewView,
+    RecommendedJobView
 )
 
 app_name = "dashboard_jobseeker"
@@ -44,7 +50,7 @@ urlpatterns = [
     path('', dashboard, name="dashboard"),
     path('profile/detail/<int:pk>', profile_detail, name='profile'),
     path('profile/edit/<int:pk>', ProfileEditView.as_view(), name='edit-profile'),
-    path('profile/cv/<int:pk>', CvDetailView.as_view(), name='cv'),
+    path('profile/cv/', CvDetailView.as_view(), name='cv'),
 
     # Reference form.
 
@@ -78,6 +84,13 @@ urlpatterns = [
     path('profile/training/list/', TrainingListView.as_view(), name='list-training'),
     path('profile/training/create/', TrainingCreateView.as_view(), name='create-training'),
     path('profile/training/edit/<int:pk>', TrainingUpdateView.as_view(), name='edit-training'),
-    path('profile/training/delete/<int:pk>', TrainingDeleteView.as_view(), name='delete-training')
+    path('profile/training/delete/<int:pk>', TrainingDeleteView.as_view(), name='delete-training'),
+
+    # Applied Jobs.
+    path('profile/applied-jobs', AppliedJobView.as_view(), name='applied-job'),
+    path('profile/bookmarked-jobs', BookMarkedJobView.as_view(), name='bookmarked-job'),
+    path('profile/scheduled-interviews', ScheduledInterviewView.as_view(), name='scheduled-interview'),
+    path('profile/recommended-jobs', RecommendedJobView.as_view(), name='recommended-job'),
+
 
 ]

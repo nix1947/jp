@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
-from datetime import datetime
+from datetime import date
 import pytz
 from django.db import models
 from apps.job.models import Job
@@ -16,6 +16,7 @@ from ..abstract_model import AbstractBaseModel
 from django.urls import reverse
 from django.db.models import F
 from django.utils.text import slugify
+from apps.job.models import JobAppliedByUser, JobBookMarked
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin, AbstractBaseModel):
@@ -73,7 +74,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, AbstractBaseModel):
             return True
 
         return False
-
 
     def is_employer(self):
         if self.user_type == usertype.EMPLOYER:
@@ -256,27 +256,33 @@ class UserProfile(AbstractBaseModel):
 
     @property
     def preferred_jobs(self):
-        """ return list of preferred jobs"""
-        return self.job_preferences.all()
+        not_expired_jobs_ids = [
+            job.id for job in Job.objects.filter(
+                is_approved=True,
+                is_draft=False,
+                job_category__in=self.job_preferences.all())
+            if job.is_expired == False
+        ]
+
+        # Reason for filter rather than returing list is to cast the list into queryset.
+        return Job.objects.filter(id__in=not_expired_jobs_ids)
 
     @property
     def get_age(self):
-        return "TODO:"
+        return int((date.today() - self.dob).days / 365.0)
 
     @property
     def get_recommended_jobs(self):
-        # TODO:
-        return Job.objects.all()
+        return self.preferred_jobs
 
-    @property
-    def get_jobs_applied(self):
-        # TODO:
-        return ''
+    def get_applied_jobs(self):
+        return JobAppliedByUser.objects.filter(user__id=self.pk).order_by('-created_date')
 
-    @property
-    def get_saved_jobs(self):
-        # TODO:
-        return ''
+    def get_bookmarked_jobs(self):
+        return JobBookMarked.objects.filter(user__id=self.pk).order_by('created_date')
+
+    def get_scheduled_interview_job(self):
+        return JobAppliedByUser.objects.filter(user__id=self.pk, status='accepted').order_by('-created_date')
 
 
 class Education(AbstractBaseModel):

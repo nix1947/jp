@@ -6,7 +6,7 @@ from django.shortcuts import reverse, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from django.forms.models import model_to_dict
 from apps.account.decorators import jobseeker_required
 from apps.account.forms import EducationForm
@@ -645,7 +645,7 @@ class ProfileEditView(UpdateView):
         })
 
 
-class CvDetailView(DetailView):
+class CvDetailView(TemplateView):
     template_name = 'dashboard_jobseeker/cv/cv.html'
     model = UserProfile
 
@@ -662,4 +662,35 @@ class CvDetailView(DetailView):
     def post(self, request, *args, **kwargs):
         raise PermissionDenied()
 
+
+class AppliedJobView(TemplateView):
+    template_name = 'dashboard_jobseeker/job/applied_job.html'
+
+    @method_decorator(login_required, jobseeker_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class BookMarkedJobView(TemplateView):
+    template_name = 'dashboard_jobseeker/job/saved_job.html'
+
+    @method_decorator(login_required, jobseeker_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class ScheduledInterviewView(TemplateView):
+    template_name = 'dashboard_jobseeker/job/scheduled_interview_job.html'
+
+    @method_decorator(login_required, jobseeker_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class RecommendedJobView(TemplateView):
+    template_name = 'dashboard_jobseeker/job/recommended_job.html'
+
+    @method_decorator(login_required, jobseeker_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 

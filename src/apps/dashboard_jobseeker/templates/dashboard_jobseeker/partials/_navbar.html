@@ -1,17 +1,18 @@
 <!-- navbar- -->
+{% load static %}
 <div class="dashboard-sidebar-wrapper pt-11" id="sidebar">
     <div class="brand-logo px-11">
-        <a href="https://shade.uxtheme.net/shade-pro">
-            <img src="image/logo-main-black.png" alt="">
+        <a href="{% url 'dashboard_jobseeker:dashboard' %}">
+            <img src="{% static 'image/logo-main-black.png' %}" alt="">
         </a>
     </div>
     <div class="my-15 px-11">
-        <a href="{% url 'dashboard_employer:job-create' %}" class="btn btn-primary btn-xl w-100 text-uppercase">
-            <span class="mr-5 d-inline-block">+</span>Post a
-            new job</a>
+        <a href="{% url 'dashboard_jobseeker:cv' %}" class="btn btn-primary btn-xl w-100 text-uppercase">
+           <i class="fa fa-down"></i>
+            Download CV</a>
     </div>
     <ul class="list-unstyled dashboard-layout-sidebar">
-        <li class="active"><a href="{% url 'dashboard_employer:dashboard' %}"
+        <li class="active"><a href="{% url 'dashboard_jobseeker:dashboard' %}"
                               class="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center"><i
                 class="icon icon-layout-11 mr-7"></i>Dashboard</a></li>
         <li class=""><a href="{% url 'dashboard_jobseeker:profile' request.user.id %}"

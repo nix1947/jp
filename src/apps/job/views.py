@@ -84,7 +84,7 @@ def apply_job(request):
             return HttpResponseRedirect(current_path)
 
     else:
-        return HttpResponseRedirect(current_path)
+        return HttpResponseRedirect('/')
 
 
 
@@ -115,6 +115,6 @@ def bookmark_job(request):
             return HttpResponseRedirect(current_path)
 
     else:
-        return HttpResponseRedirect(current_path)
+        return HttpResponseRedirect('/')
 
-# TODO: JOBSAVE, APPLIED JOB, APPLIED JOB LIST (EMPLOYEE SIDE), JOB STATUS(JOBSEEKER SIDE)
+# TODO: APPLIED JOB, APPLIED JOB LIST (EMPLOYEE SIDE), JOB STATUS(JOBSEEKER SIDE)
